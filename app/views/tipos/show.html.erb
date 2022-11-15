@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @tipo %>
+
+<div>
+  <%= link_to "Editar  tipo", edit_tipo_path(@tipo) %> |
+  <%= link_to "Lista de tipos", tipos_path %>
+
+  <%= button_to "Eliminar tipo", @tipo, method: :delete %>
+</div>

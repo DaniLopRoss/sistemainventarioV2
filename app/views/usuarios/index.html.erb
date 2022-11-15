@@ -1,0 +1,27 @@
+<h1>Lista de usuario</h1>
+<table>
+  <tr>
+    <th>RFC </th>
+    <th>Nombre</th>
+    <th>Apellido materno</th>
+    <th>Apellido paterno</th>
+    <th>Correo</th>
+    <th>Telefono</th>
+    <th>Tipo usuario </th>
+  </tr>
+
+<% @usuarios.each do |usuarios| %>
+  <tr>
+    <td><%= post.rfc %></td>
+    <td><%= post.nombre %></td>
+    <td><%= post.apellidouno %></td>
+    <td><%= post.apellidodos %></td>
+    <td><%= post.correo %></td>
+    <td><%= post.telefono %></td>
+    <td><%= post.role %></td>
+    <td><%= link_to 'Ver', :action => :show, :id => usuarios.rfc %></td>
+    <td><%= link_to 'Editar', :action => :edit, :id => usuarios.rfc %></td>
+    <td><%= link_to 'Eliminar', { :action => :destroy, :id => usuarios.rfc}, :method => :delete, :data => { :confirm => 'Esta seguro?' } %></td>
+  </tr>
+<% end %>
+</table>

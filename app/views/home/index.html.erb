@@ -1,0 +1,16 @@
+
+<h1>  
+</h1>
+                  
+<% if signed_in? %>
+<%= link_to "Salir", destroy_usuario_session_path, method: :delete %>|
+
+<% else %>
+<%= link_to "Registrarse", new_usuario_registration_path %>|
+<%= link_to "Ingresar", new_usuario_session_path %>
+<% end %>
+
+<%= link_to "Editar",  edit_usuario_registration_path %>
+
+<div>
+

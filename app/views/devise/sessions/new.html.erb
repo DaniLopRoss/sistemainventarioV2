@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google" content="notranslate">
+    <meta name="csrf-token" content="azyrMQPFEonQJUJcI0FZ2xfSjLKXqq90Ar18DLtd">
+    <title>Sistema Inventario</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://assets.mindbox.app/css/legacy-app.css?id=2ecdd2ab0a71021f849b">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-150206594-2"></script>
+    
+</head>
+
+<body>
+    <div id="main-container" class="container-fluid bg-gray-100">
+        <div class="flex flex-col items-center justify-center h-screen w-full bg-gray-100">
+            <div
+                class="flex flex-col md:flex-row w-full md:w-2/3 h-full md:h-auto bg-white rounded-lg md:shadow px-2 py-12 md:px-8 md:py-8">
+                <div class="hidden md:flex md:flex-col justify-center w-1/3 mr-12 pl-6"><img
+                        src="https://blogger.googleusercontent.com/img/a/AVvXsEim6c3KT95s8Cn8FDEtmRQMLMRkOC0RTybqEk9WsgL0Xmb2k2lk_27MctrpMi-u3spXccC0QNvVaPJVn4FzX5I1jbueJHoDGI7Dqt2ruNF6e4bsX1mslYmZhWXEHze1pEj7WHggLlfm8NApU8llGhD5WaPAQqBVyYxWQTz3Lpt7R5KNG5Hk2nFG16QE" alt="MindBox" class="max-w-full"> <br>
+                   
+                    <p class="text-center text-xs"><a href="https://mindbox.app" target="_blank">SICC</a><br>
+                        
+                    </p>
+                </div>
+                <div class="pt-4 pb-6">
+                <div class="d-flex justify-content-center py-8"><img
+                        src="https://storage.mindbox.app/data/mbid_12/school/7RWDPxMwGRVTRnQoxjnx4NkwYp3nWRw2zBpe0Vfp.png"
+                        alt="Logo" class="max-w-full h-24"> 
+                    </div>
+                  
+                    <h3>Inicio de Sesión</h3>
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                      <%= render "devise/shared/error_messages", resource: resource %>
+                      <div class="field">
+
+
+                        <%= f.label :Correo %><br />
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= f.label :password %><br />
+                        <%= f.password_field :password, autocomplete: "current-password" %>
+                      </div>
+                    
+                      <% if devise_mapping.rememberable? %>
+                        <div class="field">
+                          <%= f.check_box :remember_me %>
+                          <%= f.label :remember_me %>
+                        </div>
+                      <% end %>
+                    
+                      
+                      <div class="actions">
+                        <%= f.submit "Ingresar" %>
+                      </div>
+                    <% end %>
+                    <%= link_to 'Registrar', new_usuario_registration_path%>
+
+                    <div class="inline-block">
+                        <p class="flex flex-col text-center text-xs flex md:hidden"><a href="https://mindbox.app"
+                                target="_blank"><img src="https://assets.mindbox.app/img/assets/mindbox.svg"
+                                    alt="MindBox" class="w-32 mx-auto"></a>
+                            Todos los derechos reservados © 2022.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <%= link_to "Cerrar presentación", destroy_usuario_session_path, :method => :delete %>
+        </div>
+    </div>
+    
+    <div id="notify" class="notifxi-alert"></div>
+  
+    <iframe name="__privateStripeMetricsController1390" frameborder="0" allowtransparency="true" scrolling="no"
+        role="presentation" allow="payment *"
+        src="https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=https%3A%2F%2Fitoaxaca.mindbox.app%2Flogin%2Falumno&amp;title=MindBox%C2%AE&amp;referrer=&amp;muid=3c2db104-d0f3-4e9c-9a18-d8e070a832a2ca8573&amp;sid=NA&amp;version=6&amp;preview=false"
+        aria-hidden="true" tabindex="-1"
+        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+    </body>
+    
+    </html>

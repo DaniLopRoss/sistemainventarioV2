@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  num_equipo: 1
+  area: MyString
+
+two:
+  nombre: MyString
+  num_equipo: 1
+  area: MyString

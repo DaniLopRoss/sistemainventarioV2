@@ -1,0 +1,35 @@
+<%= form_with(model: licencium) do |form| %>
+  <% if licencium.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(licencium.errors.count, "error") %> prohibited this licencium from being saved:</h2>
+
+      <ul>
+        <% licencium.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+  <%= form.label :identificador, style: "display: block" %>
+  <%= form.text_field :id_licencia %>
+</div>
+  <div>
+    <%= form.label :Nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+
+  <div>
+    <%= form.label :AÑO_DE_LICENCIA, style: "display: block" %>
+    <%= form.number_field :anio %>
+  </div>
+
+  <div>
+    <%= form.label :Numero_de_licencia, style: "display: block" %>
+    <%= form.text_field :num_licencia %>
+  </div>
+
+  <div>
+  <button class="btn btn-info"  <%= form.submit %>Guardar </button>
+  </div>
+<% end %>

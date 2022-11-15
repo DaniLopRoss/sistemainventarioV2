@@ -1,0 +1,39 @@
+<div align="center">
+<p style="color: green"><%= notice %></p>
+
+<h1>Departamentos</h1>
+<table class="table table-hover">
+  <thead class="thead-blue" >
+    <tr>
+      <th scope="col">ID</th>
+      <th>NOMBRE</th>
+      <th>Num_equipo</th>
+      <th>Area</th>
+      <th>Acciones</th>
+     
+      
+    </tr>
+  </thead>
+  <tbody>
+
+  <% @departamento.each do |departamento| %>
+   
+    <tr>
+        <td><%= departamento.id_departamento %></td>
+        <td><%= departamento.nombre %></td>
+        <td><%= departamento.num_equipo %></td>
+        <td><%= departamento.id_area %></td>
+      <td > 
+      <%= link_to "Nuevo ", new_departamento_path %> |
+          <%= link_to "Mostrar", departamento%>|
+          <%= link_to "Editar", edit_departamento_path(departamento) %>|
+          <%= link_to "Eliminar", departamento, method: :delete, data: { confirm: "¿Estás seguro de eliminar este equipo?" } %>|
+        </td>
+      </tr>
+      
+    
+  
+</div>
+
+
+<% end %>

@@ -1,0 +1,24 @@
+
+/*
+*=require_tree
+*=require_self
+
+*/
+@import "bootstrap";
+@import 'font_awesome5_webfont';
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i");
+
+
+
+
+.field_with_errors .form-control {
+         border: 1px solid $red;
+}
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
