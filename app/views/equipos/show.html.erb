@@ -1,13 +1,7 @@
 <div class="container">     
                   <h4 class="text text-secondary">Nuevo equipo </h4>
 
-         <div class="form-group row">
-                      <%= f.label :tipo ,'Tipo:', class:'col-sm-2' %>
-                      
-                      <div class="col-sm-4">
-                      <%= @equipos.tipo %>
-                      </div>
-                  </div>
+        <% @equipos.each do |equipos| %>
 
                       <div class="form-group row">
                           <%= f.label :serie ,'Serie:', class:'col-sm-2' %>

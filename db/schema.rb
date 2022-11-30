@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_14_204904) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_22_152647) do
   create_table "areas", primary_key: "id_area", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -29,7 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_204904) do
   create_table "equipos", primary_key: ["id", "serie"], charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.virtual "serie", type: :string, limit: 25, null: false, as: "_utf8mb4'(\"tipo\\\\',\"2022\" , \"id\")'", stored: true
     t.integer "id", null: false, auto_increment: true
-    t.string "tipo"
     t.string "modelo"
     t.string "serial"
     t.string "observaciones"
@@ -50,6 +49,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_204904) do
     t.index ["id_tipos"], name: "fk_rails_cf2d83eca5"
   end
 
+  create_table "herramienta", primary_key: "id_herramienta", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre"
+    t.string "caracteristicas"
+    t.integer "existencia"
+    t.string "estatus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "insumos", primary_key: "id_insumo", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre"
+    t.string "caracteristicas"
+    t.integer "existencia"
+    t.string "estatus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "licencia", primary_key: "id_licencia", id: { type: :string, limit: 20 }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.integer "anio"
@@ -60,6 +77,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_204904) do
 
   create_table "marcas", primary_key: "id_marca", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "materiales", primary_key: "id_material", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre"
+    t.string "caracteristicas"
+    t.integer "existencia"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

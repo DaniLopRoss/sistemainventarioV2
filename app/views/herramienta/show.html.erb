@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @herramientum %>
+
+<div>
+  <%= link_to "Edit this herramientum", edit_herramientum_path(@herramientum) %> |
+  <%= link_to "Back to herramienta", herramienta_path %>
+
+  <%= button_to "Destroy this herramientum", @herramientum, method: :delete %>
+</div>

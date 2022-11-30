@@ -1,7 +1,7 @@
 class Equipo < ApplicationRecord
-         belongs_to :tipos
-         belongs_to  :licencia
-         belongs_to  :departamento
-         belongs_to  :areas
-         belongs_to  :marca 
+        
+
+         
+         validates :serie, :modelo, :serial , :id_tipos, :id_marca, :id_departamento, :id_area, :estatus, :presence => true
+         validates :serie, :uniqueness => true         
 end

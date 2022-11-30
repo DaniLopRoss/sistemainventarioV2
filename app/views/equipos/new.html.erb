@@ -9,14 +9,6 @@
                     <%= token_tag nil %>
                     <%= "<div>#{@equipos.errors.full_messages.first}</div>".html_safe if @equipos.errors.any? %>  
 
-                    
-                      <div class="form-group row">
-                      <%= f.label :tipo ,'Tipo:', class:'col-sm-2' %>
-                      
-                      <div class="col-sm-4">
-                      <%= f.text_field :tipo, class:'form-control' %>
-                      </div>
-                  </div>
 
                       <div class="form-group row">
                           <%= f.label :serie ,'Serie:', class:'col-sm-2' %>
@@ -29,9 +21,9 @@
                       
 
                            <div class="form-group row ">
-                           <%= f.label :Marca , class:'col-sm-2'%>
+                           <%= f.label :id_marca,"Marca" , class:'col-sm-2'%>
                            <div class="col-sm-4">
-                           <%= f.collection_select(:equipos, :id_marca, Marca.all.order(:nombre), :id_marca, :nombre)%>
+                           <%= f.collection_select( :id_marca, Marca.all{|m| [m.nombre, m.id_marca]}, :id, :nombre, prompt: "Seleccione la marca")%>
                            </div>
                   </div>
 
@@ -51,38 +43,37 @@
 
 
                        <div class="form-group row">
-                       <%= f.label :Edificio , class:'col-sm-2'%>
+                       <%= f.label :id_departamento, "Departamento" , class:'col-sm-2'%>
                        <div class="col-sm-4">
-                       <%= f.collection_select(:equipos, :id_departamento, Departamento.all.order(:nombre), :id_departamento, :nombre, class:'form-control')%>
-                           
-                       
+                       <%= f.collection_select( :id_departamento, Departamento.all{|d| [d.nombre, d.id_departamento]}, :id_departamento, :nombre, class:'form-control', prompt:"Seleccione el departamento")%>
+                        
                        </div>
                             </div>
+
                             <div class="form-group row">
-                            <%= f.label :tipo ,'Tipo:', class:'col-sm-2' %>
+                           <%= f.label :id_area, "Area:" , class:'col-sm-2'%>
+                           <div class="col-sm-4">
+                           <%= f.collection_select(:id_area, Area.all{|a| [a.nombre,  a.id_area]}, :id_area, :nombre, class:'form-control', prompt: "Seleccione el área")%>
+                           </div>
+                           </div>
+
+
+                            <div class="form-group row">
+                            <%= f.label :id_tipo ,'Tipo:', class:'col-sm-2' %>
                              <div class="col-sm-4">
-                             <%= f.collection_select(:equipos, :id_tipos, Tipo.all.order(:nombre), :id, :nombre,  class:'form-control' )%>
+                             <%= f.collection_select(:id_tipos, Tipo.all{|t| [t.nombre, t.id_tipos]}, :id, :nombre,  class:'form-control', prompt: "Selecione un tipo" )%>
                                   
                              </div>
                              </div>
 
-                           <div class="form-group row">
-                           <%= f.label :Area , class:'col-sm-2'%>
-                           <div class="col-sm-4">
-                           <%= f.collection_select(:equipos, :id_area, Area.all.order(:nombre), :id_area, :nombre, class:'form-control')%>
-                           </div>
-                           </div>
+                           
            
                            
                               <div class="form-group row">
-                              <%= f.label :Estatus , class:'col-sm-2'%>
+                              <%= f.label :estatus , "Estatus:" , class:'col-sm-2'%>
+                              
                                   <div class="form-group col-sm-4">
-                                  <select class="combobox form-control" name="estatus", class:'form-control'>
-                                  <option value="" selected="selected">Seleccione el estado</option>
-                                  <option value="Guardado">Guardado</option>
-                                  <option value="Activo">Activo</option>
-                                  <option value="Inactivo">Inactivo</option>
-                                </select>
+                                  <%= f.select :estatus, ["Guardado", "Activo", "Inactivo"], prompt: "Seleccione el estado" %>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -109,19 +100,20 @@
                               </div>
                           </div>
                           
-
+                        <% if false %>
                           <div class="form-group row">
-                          <%= f.label :Licencia  , class:'col-sm-2'%>
+                          <%= f.label :id_licencia, "Licencia:"  , class:'col-sm-2'%>
                               <div class="col-sm-4">
-                              <%= collection_select(:equipos, :id_licencia, Licencia.all.order(:nombre), :id, :nombre, class:'form-control')%>
+                              <%= f.collection_select(:id_licencia, Licencia.all.order(:nombre), :nombre, :nombre, class:'form-control', prompt: "Seleccione una licencia")%>
                                   
                               </div>
-                          </div>
-                             <br>
+                          </div> 
+                        <% end %>
+                        <br>
                              <br>
            
-                              <button type="submit" class="btn btn-info">Guardar</button>
-                              <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+                 <button type="submit" class="btn btn-info">Guardar</button>
+                 <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
            
                                   <br>
                                   <br>
@@ -130,6 +122,7 @@
                       </section>
                   </div>
               </div>
+              
               <% end %>
               </form>
               

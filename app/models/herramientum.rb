@@ -1,0 +1,2 @@
+class Herramientum < ApplicationRecord
+end

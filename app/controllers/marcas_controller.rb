@@ -17,6 +17,7 @@ class MarcasController < ApplicationController
 
   # GET /marcas/1/edit
   def edit
+    @marca = Marca.find(params[:id])
   end
 
   # POST /marcas or /marcas.json

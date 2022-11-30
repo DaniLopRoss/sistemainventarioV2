@@ -1,4 +1,4 @@
 class Area < ApplicationRecord
-         has_one :equipos
+         has_one :equipo
          
 end

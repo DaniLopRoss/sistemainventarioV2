@@ -1,7 +1,7 @@
 class CreateEquipos < ActiveRecord::Migration[7.0]
   def change
     create_table :equipos, :primary_key => :serie do |t|
-      t.string :tipo
+        t.string :tipo
         t.string :modelo
         t.string :serial
         t.string :observaciones

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :insumos
+  resources :herramienta
+  resources :materiales
   
   resources :equipos1s
   resources :areas

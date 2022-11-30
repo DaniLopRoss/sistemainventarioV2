@@ -16,11 +16,11 @@ class EquiposController < ApplicationController
     @equipos = Equipo.new(equipos_params)
     if @equipos.save
       flash[:notice] = 'EL EQUIPO SE HA GUARDADO EXITOSAMENTE'
-      redirect_to equipo_url(@equipos)
+      redirect_to (@equipos)
     else 
       flash[:error] = 'No se pudo guardar el equipo'
       render :new
-  end
+  end   
 end 
 
   def edit
@@ -51,6 +51,6 @@ end
      
 
       def equipos_params
-        params.require(:equipo).permit(:serie, :tipo ,:modelo, :serial, :observaciones, :ram, :disco_duro, :id_tipos, :id_marca, :id_departamento, :id_area, :id_licencia)
+        params.require(:equipo).permit(:serie,:modelo, :serial, :observaciones, :ram, :disco_duro, :id_tipos, :id_marca, :id_departamento, :id_area, :id_licencia, :estatus)
        end 
 end 

@@ -16,16 +16,16 @@
   </thead>
   <tbody>
 
-  <% @departamento.each do |departamento| %>
+                <% @departamento.each do |departamento| %>
    
-    <tr>
-        <td><%= departamento.id_departamento %></td>
-        <td><%= departamento.nombre %></td>
-        <td><%= departamento.num_equipo %></td>
-        <td><%= departamento.id_area %></td>
-      <td > 
-      <%= link_to "Nuevo ", new_departamento_path %> |
-          <%= link_to "Mostrar", departamento%>|
+              <tr>
+                  <td><%= departamento.id_departamento %></td>
+                  <td><%= departamento.nombre %></td>
+                  <td><%= departamento.num_equipo %></td>
+                  <td><%= departamento.id_area %></td>
+                
+          
+          <td>
           <%= link_to "Editar", edit_departamento_path(departamento) %>|
           <%= link_to "Eliminar", departamento, method: :delete, data: { confirm: "¿Estás seguro de eliminar este equipo?" } %>|
         </td>

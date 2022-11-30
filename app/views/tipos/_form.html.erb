@@ -1,7 +1,7 @@
 <%= form_with(model: tipo) do |form| %>
   <% if tipo.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(tipo.errors.count, "error") %> prohibited this tipo from being saved:</h2>
+      <h2><%= pluralize(tipo.errors.count, "error") %>  prohibió guardar este tipo::</h2>
 
       <ul>
         <% tipo.errors.each do |error| %>

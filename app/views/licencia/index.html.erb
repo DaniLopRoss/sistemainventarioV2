@@ -21,14 +21,13 @@
     <td><%= licencium.nombre %></td>
     <td><%= licencium.anio %></td>
     <td><%= licencium.num_licencia %></td>
-  <td > 
-    
-      
-       <%= button_to "Eliminar la licencia", @licencium, method: :delete %>
+  <td> <%= link_to "Eliminar la licencia", @licencium, method: :delete %></td>
+  <td> <%= link_to "Editar licencia", edit_licencium_path(licencium) %> </td>
+  </tr>
   <% end %>
 </div>
-<p>
-<%= link_to "Nueva Licencia", new_licencium_path %>
-<%= link_to "Regresar  a licencias", licencia_path %>
-</p>
+
+<%= button_to "Nueva Licencia", new_licencium_path %>
+
+
 </div>

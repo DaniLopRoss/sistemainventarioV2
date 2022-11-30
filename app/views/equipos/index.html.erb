@@ -11,7 +11,6 @@
     <tr>
       <th scope="col">Serie</th>
       <th scope="col">Id</th>
-      <th>Tipo</th>
       
       <th>Modelo</th>
       <th>Serial</th>
@@ -30,11 +29,12 @@
     </tr>
   </thead>
   <tbody>
+  <% @equipos= Equipo.all%>
     <% @equipos.each do |equipos| %>
       <tr>
         <td><%= equipos.serie %></td>
         <td><%= equipos.id %></td>
-        <td><%= equipos.tipo %></td>
+       
         
         <td><%= equipos.modelo %></td>
         <td><%= equipos.serial %></td>
@@ -49,12 +49,15 @@
         <td><%= equipos.estatus %></td>
         
         <td>
-          <%= link_to "Mostrar", equipos %>
+          
           <%= link_to "Editar", edit_equipo_path(equipos) %>
           <%= link_to "Eliminar", equipos, method: :delete, data: { confirm: "¿Estás seguro de eliminar este equipo?" } %>
         </td>
       </tr>
     <% end %>
+    <%if @equipos.size==0 %>
+    EQUIPO NO ENCONTRADOS
+    <%end %>
   </tbody>
 </table>
 </body>

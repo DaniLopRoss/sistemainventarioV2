@@ -3,47 +3,7 @@
 <p style="color: green font-size: 20px"><%= notice %></p>
 
 
-
-
-<!DOCTYPE html>   
-<html>   
-<body> 
-<div align="center">
-
-<h1>Equipos</h1>
-
-<table class="table table-hover">
-  <thead class="thead-blue" >
-    <tr>
-      <th scope="col">ID</th>
-      <th>NOMBRE</th>
-      <th>Num_equipo</th>
-      <th>Area</th>
-     
-      
-    </tr>
-  </thead>
-  <tbody>
-    <% @departamento.each do |departamento| %>
-
-      <tr>
-        <td><%= departamento.id_departamento %></td>
-        <td><%= departamento.nombre %></td>
-        <td><%= departamento.num_equipo %></td>
-        <td><%= departamento.id_area %></td>
-       
-        
-          <%= link_to "Mostrar", departamento%>
-          <%= link_to "Editar", edit_departamento_path(departamento) %>
-          <%= link_to "Eliminar", departamento, method: :delete, data: { confirm: "¿Estás seguro de eliminar este equipo?" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</body>
-
-</html>
+<%= render @departamento %>
 
 <div>
 <%= link_to "Regresar a departamentos", departamentos_path, class: "btn btn-success btn-xs round" %>

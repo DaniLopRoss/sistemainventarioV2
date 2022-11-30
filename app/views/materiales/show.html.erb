@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @materiale %>
+
+<div>
+  <%= link_to "Edit this materiale", edit_materiale_path(@materiale) %> |
+  <%= link_to "Back to materiales", materiales_path %>
+
+  <%= button_to "Destroy this materiale", @materiale, method: :delete %>
+</div>
