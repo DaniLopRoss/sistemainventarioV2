@@ -1,3 +1,3 @@
 class Licencium < ApplicationRecord
-         has_one :equipos
+    has_one :equipos
 end

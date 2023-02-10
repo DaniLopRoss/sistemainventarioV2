@@ -1,22 +1,35 @@
 Rails.application.routes.draw do
-  resources :insumos
-  resources :herramienta
-  resources :materiales
-  
-  resources :equipos1s
-  resources :areas
-  resources :marcas
- 
-  
-  devise_for :usuarios
+  resources :departaments
 
+  resources :rooms
+  resources :area1s
+  resources :departamento1s
+  resources :reportes
+  resources :solicituds
+  resources :mantenimientos
+  resources :equipo12
+  resources :equipo12s
   resources :departamentos
-  resources :licencia
-  resources :equipos
-  resources :usuarios
-  get 'usuarios', to: 'usuarios#new'
 
+
+
+  resources :herramienta
+
+
+  resources :areas
+  
+
+  resources :insumos
+  resources :materiales
+  resources :marcas
   resources :tipos
+  resources :licencia
+  devise_for :usuarios, controllers: {
+    usuarios: :sessions
+  }
+
+  resources :usuarios
+  get 'usuarios', to: 'usuarios#new' 
   root  'home#index'
 
 

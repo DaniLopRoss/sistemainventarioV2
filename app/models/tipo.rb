@@ -1,6 +1,6 @@
 class Tipo < ApplicationRecord
-         has_one :equipo
+    has_many :equipos
 
-         validates :nombre , :presence => true 
-         validates :nombre, :uniqueness => true 
+    validates :nombre , :presence => true 
+    validates :nombre, :uniqueness => true 
 end

@@ -1,0 +1,70 @@
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+
+<div class="container">
+<div class="card mt-5">
+<div class="card-header">
+<ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Area</a></li>
+          <li class="breadcrumb-item active">Registrar nuevo area</li>
+        </ol>
+                  <h4 class="text">Nuevo Area </h4>
+</div>
+ <div class="probar">
+                  <%= form_for @area1,url: {action: :create} do |f| %>
+                    <%= token_tag nil %>
+                    <%= "<div>#{@area1.errors.full_messages.first}</div>".html_safe if @area1.errors.any? %>  
+
+<br>
+
+
+                      <div class="form-group row">
+                          <%= f.label :nombre ,'Nombre:', class:'col-sm-2' %>
+                          
+                          <div class="col-sm-4">
+                          <%= f.text_field :nombre , class:'form-control' %>
+                          </div>
+                      </div>
+            
+
+
+
+                            <div class="form-group row">
+                            <%= f.label :id_departamento ,'Tipo:', class:'col-sm-2' %>
+                             <div class="col-sm-4">
+                    
+                             <div class="placeholder">
+                             <%= f.collection_select( :id_departamento, Departamento1.all,:id, :nombre, class:'form-control')%>
+                            
+                        
+                           </div>
+                            
+                             </div>
+   </div>
+                           
+                             </div>
+                             </div>
+
+                           
+           
+                           
+                              
+                        <br/>
+                         <div>
+                 <button type="submit" class="btn btn-info">Guardar</button>
+                 <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+           
+                                 
+                                  
+                          </div>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+  
+              <% end %>
+              </form>
+              
+
+

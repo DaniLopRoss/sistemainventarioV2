@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+<h5>Id: <%=@departament.id%></h5>
+<h5>Nombre: <%=@departament.nombre%></h5>
+<h5>No.Equipos: <%=@departament.num_equipos%></h5>
+<h5>Departamento: <%=@departament.room.nombre%></h5>
+
+<div>
+  <%= link_to "Edit this departament", edit_departament_path(@departament) %> |
+  <%= link_to "Back to departaments", departaments_path %>
+
+
+  <%= button_to "Destroy this departament", @departament, method: :delete %>
+
+
+
+  <%@departament.room.nombre %>
+
+</div>

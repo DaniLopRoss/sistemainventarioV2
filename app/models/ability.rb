@@ -6,30 +6,28 @@ class Ability
   def initialize(usuarios)
    
   
-     usuarios ||= Usuarios.new
-      if usuarios.admin?
-        can :manage, :all
-      else 
-        can :update, Departamento do |departamentos|
-        departamentos.usuarios == usuario
-       end
-       can :destroy, Departamento do |departamentos|
-        departamentos.usuario == usuario
-       end 
-       can :update, Equipos do |equipos|
-        departamentos.usuario == usuario
-       end
-       can :destroy, Equipos do |equipos|
-        departamentos.usuario == usuario
-       end 
-       can :create, Departamento
-       can :create, Equipo
-       can :read, :all
-      
-     end
-    end 
-  
-end 
-      
-  
+    usuarios ||= Usuario.new
+      if usuarios.admin = 0
 
+       can :manage, :all
+      
+      elsif usuarios.admin == 1
+       alias_action :create, :read, :update, :to => :cru
+       can :cru, Solicitud
+       can :cru, Equipo12 
+       can :cru, Mantenimiento
+       can :cru, Reporte 
+       can :cru, Licencias
+       can :cru, Tipos
+       can :cru, Marcas
+       can :cru, Insumo
+       can :cru, Materiale
+
+      elsif usuarios.admin == 2
+       alias_action :create, :read, :update, to => :cru
+       can :cru, Solicitud
+       
+     end 
+   end
+  
+end
