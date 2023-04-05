@@ -1,33 +1,48 @@
 # frozen_string_literal: true
 
 class Ability
+
+ 
   include CanCan::Ability
 
-  def initialize(usuarios)
+  def initialize(usuario)
    
   
-    usuarios ||= Usuario.new
-      if usuarios.admin = 0
+    usuario ||= Usuario.new
 
-       can :manage, :all
-      
-      elsif usuarios.admin == 1
-       alias_action :create, :read, :update, :to => :cru
-       can :cru, Solicitud
-       can :cru, Equipo12 
-       can :cru, Mantenimiento
-       can :cru, Reporte 
-       can :cru, Licencias
-       can :cru, Tipos
-       can :cru, Marcas
-       can :cru, Insumo
-       can :cru, Materiale
-
-      elsif usuarios.admin == 2
-       alias_action :create, :read, :update, to => :cru
-       can :cru, Solicitud
+              if usuario.role == "Administrador"
        
-     end 
-   end
+                     can :manage, :all
+
+              
+            elsif usuario.role == "Agente"
+              alias_action :create, :read, :update, :to => :cru
+
+                     can :cru, Reporte
+                     can :cru, Resource
+                     can :cru, Shape
+                     can :cru, Tool
+                     can :cru, Zone
+                     can :cru, Departament
+                     can :cru, Equipment 
+                     can :cru, Brand
+                     can :cru, Maintenance
+                     can :cru, Physical 
+                     can :read, Solicitud
+
+              else usuario.role == "Personal"
+        
+                     alias_action :create, :read, :update, :to => :cru
+                     can :cru, Solicitud
+
+              end 
+       end 
+end 
+ 
+
   
-end
+  
+
+      
+  
+

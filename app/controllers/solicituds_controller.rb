@@ -1,5 +1,5 @@
 class SolicitudsController < ApplicationController
-  #load_and_authorize_resource
+  load_and_authorize_resource
   before_action :set_solicitud, only: %i[ show edit update destroy ]
 
   # GET /solicituds or /solicituds.json
@@ -14,6 +14,7 @@ class SolicitudsController < ApplicationController
   # GET /solicituds/new
   def new
     @solicitud = Solicitud.new
+    
   end
 
   # GET /solicituds/1/edit
@@ -66,6 +67,6 @@ class SolicitudsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def solicitud_params
-      params.require(:solicitud).permit(:area_solicitante, :fecha, :descripcion, :rfc)
+      params.require(:solicitud).permit(:zone_id, :fecha, :descripcion, :usuarios_id)
     end
 end

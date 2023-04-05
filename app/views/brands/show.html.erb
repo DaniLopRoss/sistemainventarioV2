@@ -1,0 +1,31 @@
+
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+
+<div class="container">
+<div class="card mt-5">
+<div class="card-header">
+<ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Marca</a></li>
+          <li class="breadcrumb-item active">Caracteristicas de la marca</li>
+        </ol>
+                  <h5 class="text">Marca <%= @brand.id%> </h5>
+</div>
+ <div class="probar">
+
+
+<%= render @brand %>
+<br></br>
+
+<div>
+  <% if can? :edit, @brand%>
+  <%= link_to "Editar", edit_brand_path(@brand),  class: "btn btn-warning btn-xs round btn-editar " %>
+  <%end%>
+   <%  if can? :destroy, @brand%>
+  <%= link_to "Eliminar", @brand, method: :delete, data: { confirm: "Esta seguro de eliminar"},  class: "btn btn-danger btn-eliminar" %>
+  <%end%>
+  <%= link_to "Regresar", brands_path,  class: "btn btn-success btn-xs round btn-regresar "%>
+  <br>
+  </br>
+  </div>

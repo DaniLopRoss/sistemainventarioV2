@@ -1,0 +1,34 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div data-controller="showhide" data-showhide-show-if-value="passcode_protected">
+    <div>
+      <%= form.label :access, style: "display: block" %>
+      <%= form.select :access, Post.accesses, {include_blank: true}, {data: {showhide_target: "input", action: "change->showhide#toggle"}} %>
+    </div>
+
+    <div data-showhide-target="output">
+      <%= form.label :passcode, style: "display: block" %>
+      <%= form.text_field :passcode %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

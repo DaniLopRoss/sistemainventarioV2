@@ -22,39 +22,45 @@
   <tr>
     <th>RFC </th>
     <th>Nombre</th>
-    <th>Apellido materno</th>
     <th>Apellido paterno</th>
+    <th>Apellido materno</th>
     <th>Correo</th>
     <th>Tipo usuario </th>
+    <th>Admin </th>
     <th>Acciones</th>
     
   </tr>
 </thead>
 <% @usuarios.each do |usuarios| %>
   <tr>
-    <td><%= usuarios.rfc %></td>
+    <td><%= usuarios.id %></td>
     <td><%= usuarios.nombre %></td>
     <td><%= usuarios.apellidouno %></td>
     <td><%= usuarios.apellidodos %></td>
     <td><%= usuarios.email %></td>
-    <td><%= usuarios.role %></td>
+    <td><%= usuarios.role  %></td>
+    <td><%= usuarios.admin%>
     <td>
     <% if can? :edit, @usuarios%>
                   <a href="<%= edit_usuario_path(usuarios)%>" class="edit"><i class="bi bi-pencil-square"></i></a>
                   <%end%>
                   <% if can? :show, @usuarios%>
-                  <a  class="mostrar"  <%= link_to ({:action => :show, :id => usuarios.rfc}) do %><i class="bi bi-eye-fill"></i><%end%></a>  
+                  <a  class="mostrar"  <%= link_to ({:action => :show, :id => usuarios.id}) do %><i class="bi bi-eye-fill"></i><%end%></a>  
                   <%end%>
                   <%  if can? :destroy, @usuarios%>
-                   <a class="eliminar" <%= link_to ({ :action => :destroy, :id => usuarios.rfc })do%>
+                   <a class="eliminar" <%= link_to ({ :action => :destroy, :id => usuarios.id })do%>
                   <i class="bi bi-trash"></i>
                   <%end%>
                   <% end %>
                   </a>
+                  
    </td>
   </tr>
 <% end %>
 
+<% if can? :new, @usuario%>
+              <a href="usuarios/new" class="new"><i class="bi bi-plus-circle-fill"></i></a>
+              <%end%>
 
 </div>
 <script>

@@ -1,0 +1,193 @@
+<%= stylesheet_link_tag "style" %>
+</head>
+
+ <div class="probar">
+<%= form_with(model: equipment) do |f| %>
+  <% if equipment.errors.any? %>
+    <div style="color: red">
+      
+      <ul>
+        <% equipment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br>
+                          <div class="form-group row">
+                            <%= f.label :shape_id ,'Tipo:', class:'col-sm-2' %>
+                             <div class="col-sm-4">
+                             <div class="placeholder">
+                             <%=f.collection_select(:shape_id, Shape.all{|a| [a.nombre]}, :id, :nombre, class:'form-control', prompt: "Selecione un tipo" )%>
+                                 </div> 
+                             </div>
+                             </div>
+
+
+                          <div class="form-group row">
+                           <%= f.label :Modelo , "Modelo:",class:'col-sm-2'%>
+                           <div class="col-sm-4">
+                           <%= f.text_field :modelo , class:'form-control'%>
+                           </div>
+                           </div>
+
+                           <div class="form-group row">
+                           <%= f.label :Serial ,"Serial:", class:'col-sm-2'%>
+                           <div class="col-sm-4">
+                           <%= f.text_field :serial , class:'form-control'%>
+                           </div>
+                       </div>
+
+                       <div class="form-group row ">
+                       <%= f.label :brand_id,"Marca:" , class:'col-sm-2'%>
+                       <div class="col-sm-4">
+                       <div class="placeholder">
+                       <%= f.collection_select( :brand_id, Brand.all{|m| [m.nombre, m.id_marca]}, :id, :nombre, prompt: "Seleccione la marca")%>
+                       </div>
+                       </div>
+              </div>
+              <% if false %>
+                       <div class="form-group row">
+                       <%= f.label :departament_id, "Departamento:" , class:'col-sm-2'%>
+                       <div class="col-sm-4">
+                       <div class="placeholder">
+                       <%= f.collection_select( :departament_id, Departament.all{|d| [d.nombre, d.id]}, :id, :nombre, class:'form-control', prompt:"Seleccione el departamento")%>
+                        </div>
+                       </div>
+                            </div>
+               <% end%>
+                            <div class="form-group row">
+                           <%= f.label :zone_id, "Área:" , class:'col-sm-2'%>
+                           <div class="col-sm-4">
+                           <div class="placeholder">
+                           <%= f.collection_select(:zone_id, Zone.all{|a| [a.nombre]}, :id, :nombre, class:'form-control', prompt: "Seleccione el área")%>
+                           </div>
+                           </div>
+                           </div>
+
+
+                           
+                              <div class="form-group row">
+                              <%= f.label :estatus , "Estatus:" , class:'col-sm-2'%>
+                              
+                                  <div class="form-group col-sm-4">
+                                  <div class="placeholder">
+                                  <%= f.select :estatus, ["Guardado", "Activo", "Inactivo"], prompt: "Seleccione el estado" %>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                              <%= f.label :Observaciones ,"Observaciones:", class:'col-sm-2'%>
+                              <div class="col-sm-4">
+                              <%= f.text_field :observaciones , class:'form-control'%>
+                              </div>
+                          </div>
+                          
+
+                          <div id="1000" class="data"> 
+                        <div class="form-group row ">
+                        <%= f.label :RAM ,"RAM:", class:'col-sm-2'%>
+                            <div class="col-sm-4">
+                            <%= f.text_field :ram , class:'form-control'%>
+                               </div>
+                        </div>
+         
+
+                        <div class="form-group row">
+                        <%= f.label :Disco_duro ,"Disco duro:" ,class:'col-sm-2' %>
+                            <div class="col-sm-4">
+                            <%= f.text_field :disco_duro , class:'form-control'%>
+                            </div>
+                        </div>
+                  </div>
+                  <div id="1001" class="data"> 
+                  <div class="form-group row ">
+                  <%= f.label :RAM , "RAM:",class:'col-sm-2'%>
+                      <div class="col-sm-4">
+                      <%= f.text_field :ram , class:'form-control'%>
+                         </div>
+                  </div>
+   
+
+                  <div class="form-group row">
+                  <%= f.label :Disco_duro,"Disco duro:" , class:'col-sm-2' %>
+                     
+                      <div class="col-sm-4">
+                      <%= f.text_field :disco_duro , class:'form-control'%>
+                      </div>
+                  </div>
+            </div>
+
+            <div id="1007" class="data"> 
+                        <div class="form-group row ">
+                        <%= f.label :RAM ,"RAM:", class:'col-sm-2'%>
+                            <div class="col-sm-4">
+                            <%= f.text_field :ram , class:'form-control'%>
+                               </div>
+                        </div>
+         
+
+                        <div class="form-group row">
+                        <%= f.label :Disco_duro,"Disco duro:" , class:'col-sm-2' %>
+                           
+                            <div class="col-sm-4">
+                            <%= f.text_field :disco_duro , class:'form-control'%>
+                            </div>
+                        </div>
+                  </div>
+
+                          <div class="form-group row">
+                          <%= f.label :fecharegistro, "Fecha de registro:",class:'col-sm-2' %>
+                             
+                              <div class="col-sm-4">
+                              <%= f.date_select :fecharegistro  , class:'form-control', min: Date.today%>
+                              </div>
+                          </div>
+
+                          
+                          
+              
+                          <div class="form-group row">
+                          <%= f.label :licence_id, "Licencia:"  , class:'col-sm-2'%>
+                              <div class="col-sm-4">
+                              <div class="placeholder">
+                              <%= f.collection_select(:licence_id, Licence.all.order(:nombre), :id, :nombre, class:'form-control', prompt: "Seleccione una licencia")%>
+                                  </div>
+                              </div>
+                          </div> 
+                        
+
+                        <br>
+                        </br>
+                          <button  class="btn btn-info  btn-xs round btn-guardar"  <%= f.submit %>Guardar </button>
+                          <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"%>
+                          <%= link_to "Regresar", equipment_index_path, class: "btn btn-success btn-xs round btn-regresar "  %>
+           
+                                 
+                          <br>
+                          </br>   
+                          </div>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+  
+              <% end %>
+              </form>
+              <br>
+              
+<script>
+              scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+              </script>
+
+
+              <script>
+
+              $(document).ready(function(){
+                $("#equipment_shape_id").on('change', function(){
+                  $(".data").hide();
+                  $("#"+ $(this).val()).fadeIn(100);
+                }).change();
+              });
+  
+                </script>

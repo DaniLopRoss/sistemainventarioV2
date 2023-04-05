@@ -1,11 +1,18 @@
 class ReportesController < ApplicationController
-  #load_and_authorize_resource
+  load_and_authorize_resource
   before_action :set_reporte, only: %i[ show edit update destroy ]
 
   # GET /reportes or /reportes.json
   def index
-    @reportes = Reporte.all
-  end
+    @start_date = params[:start].try(:to_date) || 30.days.ago.to_date
+    @end_date = params[:end].try(:to_date) || Date.current
+    range = (@start_date..@end_date)
+    
+    @reportes = Reporte.where(date: range).order(date: :desc)
+   @reportes = Reporte.all
+   
+end 
+
 
   # GET /reportes/1 or /reportes/1.json
   def show
@@ -66,6 +73,6 @@ class ReportesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reporte_params
-      params.require(:reporte).permit(:fecha, :observaciones, :tipo_problema, :id_mantenimiento)
+      params.require(:reporte).permit(:fecha, :observaciones, :tipo_problema, :maintenances_id)
     end
 end

@@ -1,2 +1,0 @@
-module Departamento1sHelper
-end

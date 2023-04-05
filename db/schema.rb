@@ -10,91 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_02_174053) do
-  create_table "area1s", primary_key: "id_area", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_171816) do
+  create_table "brands", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
-    t.integer "id_departamento"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["id_departamento"], name: "fk_rails_81a50785bb"
-  end
-
-  create_table "areas", primary_key: "id_area", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "id_departamento"
-    t.index ["id_departamento"], name: "fk_rails_8a62d43f2e"
-  end
-
-  create_table "departamento1s", primary_key: "id_departamento", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "nombre"
-    t.integer "num_equipo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "departamentos", primary_key: "id_departamento", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "nombre"
-    t.integer "num_equipo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "departaments", id: :bigint, default: nil, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "departaments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.integer "num_equipos"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "room_id", null: false
-    t.index ["room_id"], name: "index_departaments_on_room_id"
   end
 
-  create_table "dummies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "equipo12s", primary_key: "serie", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "tipo"
+  create_table "equipment", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "estatus"
     t.string "modelo"
     t.string "serial"
     t.string "observaciones"
     t.string "ram"
     t.string "disco_duro"
-    t.integer "id_tipo"
-    t.integer "id_marcas"
-    t.integer "id_departamentos"
-    t.integer "id_areas"
-    t.string "id_licencias"
-    t.string "estatus"
     t.date "fecharegistro"
-    t.index ["id_areas"], name: "fk_rails_e1d6ec70cc"
-    t.index ["id_departamentos"], name: "fk_rails_d14d8d8728"
-    t.index ["id_licencias"], name: "fk_rails_db6fd01638"
-    t.index ["id_marcas"], name: "fk_rails_447672c699"
-    t.index ["id_tipo"], name: "fk_rails_ab1eaec3c4"
+    t.bigint "departament_id"
+    t.bigint "zone_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "shape_id", null: false
+    t.bigint "licence_id", null: false
+    t.index ["brand_id"], name: "index_equipment_on_brand_id"
+    t.index ["departament_id"], name: "index_equipment_on_departament_id"
+    t.index ["licence_id"], name: "index_equipment_on_licence_id"
+    t.index ["shape_id"], name: "index_equipment_on_shape_id"
+    t.index ["zone_id"], name: "index_equipment_on_zone_id"
   end
 
-  create_table "herramienta", primary_key: "id_herramienta", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "nombre"
-    t.string "caracteristicas"
-    t.integer "existencia"
-    t.string "estatus"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "insumos", primary_key: "id_insumo", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "nombre"
-    t.string "caracteristicas"
-    t.integer "existencia"
-    t.string "estatus"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "licencia", primary_key: "id_licencia", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "licences", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.integer "anio"
     t.string "num_licencia"
@@ -102,37 +52,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_174053) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "mantenimientos", primary_key: "id_mantenimiento", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "maintenances", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "fecha_inicio"
     t.datetime "fecha_fin"
     t.text "observaciones"
     t.string "tipo_mantenimiento"
-    t.string "serie"
-    t.integer "id_departamento"
-    t.string "rfc"
-    t.integer "id_materiales"
-    t.integer "id_herramienta"
-    t.integer "id_insumo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["id_departamento"], name: "fk_rails_0fa01aa708"
-    t.index ["id_herramienta"], name: "fk_rails_9f760d3b22"
-    t.index ["id_insumo"], name: "fk_rails_11f2e81ae5"
-    t.index ["id_materiales"], name: "fk_rails_86ffc5a6a9"
-    t.index ["rfc"], name: "fk_rails_14944d4f12"
-    t.index ["serie"], name: "fk_rails_2582c470a0"
-  end
-
-  create_table "marcas", primary_key: "id_marca", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "zone_id", null: false
+    t.bigint "physical_id", null: false
+    t.bigint "tool_id", null: false
+    t.bigint "resource_id", null: false
+    t.string "usuario_id", null: false
+    t.string "equipment_id", null: false
     t.string "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["equipment_id"], name: "index_maintenances_on_equipment_id"
+    t.index ["physical_id"], name: "index_maintenances_on_physical_id"
+    t.index ["resource_id"], name: "index_maintenances_on_resource_id"
+    t.index ["tool_id"], name: "index_maintenances_on_tool_id"
+    t.index ["usuario_id"], name: "index_maintenances_on_usuario_id"
+    t.index ["zone_id"], name: "index_maintenances_on_zone_id"
   end
 
-  create_table "materiales", primary_key: "id_material", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "physicals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.string "caracteristicas"
     t.integer "existencia"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "access"
+    t.string "passcode"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -141,35 +92,48 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_174053) do
     t.date "fecha"
     t.text "observaciones"
     t.string "tipo_problema"
-    t.integer "id_mantenimiento"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["id_mantenimiento"], name: "fk_rails_1d8719f436"
+    t.bigint "maintenance_id", null: false
+    t.index ["maintenance_id"], name: "index_reportes_on_maintenance_id"
   end
 
-  create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "resources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre"
+    t.string "caracteristica"
+    t.integer "existencia"
+    t.string "estatus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shapes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "solicituds", primary_key: "id_solicitud", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "area_solicitante"
     t.date "fecha"
     t.text "descripcion"
-    t.string "rfc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rfc"], name: "fk_rails_f24fa999e5"
+    t.string "usuario_id", null: false
+    t.bigint "zone_id", null: false
+    t.index ["usuario_id"], name: "index_solicituds_on_usuario_id"
+    t.index ["zone_id"], name: "index_solicituds_on_zone_id"
   end
 
-  create_table "tipos", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tools", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
+    t.string "caracteristicas"
+    t.integer "existencia"
+    t.string "estatus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "usuarios", primary_key: "rfc", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "usuarios", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -181,25 +145,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_174053) do
     t.string "apellidouno"
     t.string "apellidodos"
     t.string "role"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.boolean "admin", default: false
+    t.index ["confirmation_token"], name: "index_usuarios_on_confirmation_token", unique: true
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "area1s", "departamento1s", column: "id_departamento", primary_key: "id_departamento"
-  add_foreign_key "areas", "departamentos", column: "id_departamento", primary_key: "id_departamento"
-  add_foreign_key "departaments", "rooms"
-  add_foreign_key "equipo12s", "areas", column: "id_areas", primary_key: "id_area"
-  add_foreign_key "equipo12s", "departamentos", column: "id_departamentos", primary_key: "id_departamento"
-  add_foreign_key "equipo12s", "licencia", column: "id_licencias", primary_key: "id_licencia"
-  add_foreign_key "equipo12s", "marcas", column: "id_marcas", primary_key: "id_marca"
-  add_foreign_key "equipo12s", "tipos", column: "id_tipo"
-  add_foreign_key "mantenimientos", "departamentos", column: "id_departamento", primary_key: "id_departamento"
-  add_foreign_key "mantenimientos", "equipo12s", column: "serie", primary_key: "serie"
-  add_foreign_key "mantenimientos", "herramienta", column: "id_herramienta", primary_key: "id_herramienta"
-  add_foreign_key "mantenimientos", "insumos", column: "id_insumo", primary_key: "id_insumo"
-  add_foreign_key "mantenimientos", "materiales", column: "id_materiales", primary_key: "id_material"
-  add_foreign_key "mantenimientos", "usuarios", column: "rfc", primary_key: "rfc"
-  add_foreign_key "reportes", "mantenimientos", column: "id_mantenimiento", primary_key: "id_mantenimiento"
-  add_foreign_key "solicituds", "usuarios", column: "rfc", primary_key: "rfc"
+  create_table "zones", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "departament_id", null: false
+    t.index ["departament_id"], name: "index_zones_on_departament_id"
+  end
+
+  add_foreign_key "equipment", "brands"
+  add_foreign_key "equipment", "departaments"
+  add_foreign_key "equipment", "licences"
+  add_foreign_key "equipment", "shapes"
+  add_foreign_key "equipment", "zones"
+  add_foreign_key "maintenances", "equipment"
+  add_foreign_key "maintenances", "physicals"
+  add_foreign_key "maintenances", "resources"
+  add_foreign_key "maintenances", "tools"
+  add_foreign_key "maintenances", "usuarios"
+  add_foreign_key "maintenances", "zones"
+  add_foreign_key "reportes", "maintenances"
+  add_foreign_key "solicituds", "usuarios"
+  add_foreign_key "solicituds", "zones"
+  add_foreign_key "zones", "departaments"
 end

@@ -1,4 +1,5 @@
 class DepartamentsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_departament, only: %i[ show edit update destroy ]
 
   # GET /departaments or /departaments.json
@@ -25,7 +26,7 @@ class DepartamentsController < ApplicationController
 
     respond_to do |format|
       if @departament.save
-        format.html { redirect_to departament_url(@departament), notice: "Departament was successfully created." }
+        format.html { redirect_to departament_url(@departament), notice: "El departamento fue guardado con exito" }
         format.json { render :show, status: :created, location: @departament }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class DepartamentsController < ApplicationController
   def update
     respond_to do |format|
       if @departament.update(departament_params)
-        format.html { redirect_to departament_url(@departament), notice: "Departament was successfully updated." }
+        format.html { redirect_to departament_url(@departament), notice: "El departamento se ha actualizado correctamente." }
         format.json { render :show, status: :ok, location: @departament }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +53,7 @@ class DepartamentsController < ApplicationController
     @departament.destroy
 
     respond_to do |format|
-      format.html { redirect_to departaments_url, notice: "Departament was successfully destroyed." }
+      format.html { redirect_to departaments_url, notice: "El departamento se ha eliminado." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +66,6 @@ class DepartamentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def departament_params
-      params.require(:departament).permit(:nombre,:num_equipos, :room_id)
+      params.require(:departament).permit(:nombre, :num_equipos)
     end
 end

@@ -1,0 +1,34 @@
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+
+ <div class="probar">
+<%= form_with(model: shape) do |form| %>
+  <% if shape.errors.any? %>
+    <div style="color: red">
+      
+      <ul>
+        <% shape.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br>
+  <div class="form-group row">
+    <%= form.label :nombre, "Nombre:", class:'col-sm-2'  %>
+    <div class="col-sm-4">
+    <%= form.text_field :nombre, class:'form-control' %>
+  </div>
+  <div>
+  <br>
+  <br>
+  <button  class="btn btn-info  btn-xs round btn-guardar"  <%= form.submit %>Guardar </button>
+  <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"%>
+  <%= link_to "Regresar", shapes_path, class: "btn btn-success btn-xs round btn-regresar "  %>
+  <br>
+  </br>
+  </div>
+
+<% end %>

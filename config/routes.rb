@@ -1,41 +1,33 @@
 Rails.application.routes.draw do
+  resources :maintenances
+  resources :equipment
+  resources :resources
+  resources :tools
+  resources :physicals
+  resources :shapes
+  resources :licences
+  resources :brands
   resources :departaments
-
-  resources :rooms
-  resources :area1s
-  resources :departamento1s
+  resources :zones
   resources :reportes
   resources :solicituds
-  resources :mantenimientos
-  resources :equipo12
-  resources :equipo12s
-  resources :departamentos
-
-
-
-  resources :herramienta
-
-
-  resources :areas
+ 
   
 
-  resources :insumos
-  resources :materiales
-  resources :marcas
-  resources :tipos
-  resources :licencia
   devise_for :usuarios, controllers: {
-    usuarios: :sessions
-  }
-
+    usuarios: :sessions 
+  }, confirmations: 'users/confirmations'
+  
+  resources :departamentos
+  resources :licencia
+  
   resources :usuarios
-  get 'usuarios', to: 'usuarios#new' 
+  get 'usuarios', to: 'usuarios#new'  
+
+  resources :tipos
   root  'home#index'
 
 
-    #devise_scope :usuario do                                                                
-   #delete '/usuario/sign_out' => 'devise/sessions#destroy'       
- #end
 end 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

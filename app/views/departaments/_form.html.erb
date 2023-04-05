@@ -1,7 +1,12 @@
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+
+ <div class="probar">
 <%= form_with(model: departament) do |form| %>
   <% if departament.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(departament.errors.count, "error") %> prohibited this departament from being saved:</h2>
+      
 
       <ul>
         <% departament.errors.each do |error| %>
@@ -10,9 +15,8 @@
       </ul>
     </div>
   <% end %>
-<br>
-
-   <div class="form-group row">
+  <br>
+<div class="form-group row">
    <%= form.label :nombre ,'Nombre:', class:'col-sm-2' %>
    
    <div class="col-sm-4">
@@ -21,29 +25,19 @@
 </div>
 
 
-  <div class="form-group row ">
-  <%= form.label :num_equipos, class:'col-sm-2'%>
-  <div class="col-sm-4">
-  <%= form.number_field :num_equipos, class:'form-control'  %>
-  </div>
-</div>
 
-<div class="form-group row ">
-  <%= form.label :area, class:'col-sm-2' %>
-  <div class="col-sm-4">
- <div class="placeholder">
-  <%= form.collection_select( :room_id, Room.all.order(:nombre), :id, :nombre, class:'form-control')%>                      
-</div>
-</div>
-</div>
-
-
-
-
-<br>
-<div>
-<button class="btn btn-info" <%= form.submit %> Guardar </button>
-<%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
-</div>
-</div>
-<%end%>
+ 
+   <div class="form-group row ">
+     <%= form.label :num_equipos, "Num. Equipos:", class:'col-sm-2'%>
+     <div class="col-sm-4">
+     <%= form.number_field :num_equipos, class:'form-control'  %>
+     </div>
+   </div>
+  <br>
+   <div>
+   <button class="btn btn-info  btn-xs round btn-guardar" <%= form.submit %> Guardar </button>
+   <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"%>
+   <%= link_to "Regresar", departaments_path, class: "btn btn-success btn-xs round btn-regresar "  %> 
+   
+   </div>
+<% end %>

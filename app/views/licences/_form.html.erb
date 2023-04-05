@@ -1,0 +1,46 @@
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+
+
+ <div class="probar">
+<%= form_with(model: licence) do |form| %>
+  <% if licence.errors.any? %>
+    <div style="color: red">
+     
+
+      <ul>
+        <% licence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+<div class="form-group row">
+    <%= form.label :Nombre,"Nombre:", class:'col-sm-3'%>
+    <div class="col-sm-5">
+    <%= form.text_field :nombre, class:'form-control' %>
+  </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :Año,"Año de licencia:", class:'col-sm-3' %>
+    <div class="col-sm-5">
+    <%= form.date_field :anio, class:'form-control' %>
+  </div>
+</div>
+  <div class="form-group row">
+    <%= form.label :Numero,"Numero de licencia:", class:'col-sm-3' %>
+    <div class="col-sm-5">
+    <%= form.text_field :num_licencia, class:'form-control' %>
+  </div>
+  </div>
+<br>
+  <div>
+  <button  class="btn btn-info  btn-xs round btn-guardar"  <%= form.submit %>Guardar </button>
+  <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"%>
+  <%= link_to "Regresar", licences_path, class: "btn btn-success btn-xs round btn-regresar "  %>
+  </div>
+<% end %>
+

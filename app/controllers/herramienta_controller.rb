@@ -1,5 +1,5 @@
 class HerramientaController < ApplicationController
-  #load_and_authorize_resource
+  load_and_authorize_resource
   before_action :set_herramientum, only: %i[ show edit update destroy ]
 
   # GET /herramienta or /herramienta.json
@@ -24,7 +24,7 @@ class HerramientaController < ApplicationController
   def create
     @herramientum = Herramientum.new(herramientum_params)
 
-    respond_to do |format|
+    
       if @herramientum.save
         flash[:notice]= "La herramienta fue creada con exito";
         redirect_to herramienta_path
@@ -33,7 +33,7 @@ class HerramientaController < ApplicationController
         render :new 
       end
     end
-  end
+  
 
   # PATCH/PUT /herramienta/1 or /herramienta/1.json
   def update

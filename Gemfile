@@ -79,6 +79,9 @@ gem 'cucumber-rails', :require => false
 group :development, :test do
   gem "database_cleaner"
   gem "rspec-rails"
+  gem 'rspec', '~> 3.4'
+ gem 'capybara', '~> 3.37', '>= 3.37.1'
+  gem "launchy"
 end
 
 
@@ -95,9 +98,18 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+
+
   gem "webdrivers"
+
+  #gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
+  gem 'ffaker'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+
+
 end
 gem "webpacker", "~> 5.4"
 
@@ -119,3 +131,15 @@ gem 'jquery-datatables-rails'
 gem "jquery-datatables", "~> 1.10"
 
 gem 'rails-i18n'
+
+gem 'webpacker-react', "~> 1.0.0.beta.1"
+
+gem 'coffee-rails', '~> 4.0', '>= 4.1.1'
+
+
+gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
+gem 'bootstrap-datetimepicker-rails'
+gem 'bootstrap3-datetimepicker-rails'
+
+gem 'figaro'

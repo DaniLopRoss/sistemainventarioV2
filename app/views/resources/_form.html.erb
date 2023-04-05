@@ -1,0 +1,52 @@
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+
+
+<%= form_with(model: resource) do |form| %>
+  <% if resource.errors.any? %>
+    <div style="color: red">
+     
+      <ul>
+        <% resource.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br/>
+  <div class="form-group row">
+    <%= form.label :nombre,"Nombre:", class:'col-sm-2' %>
+    <div class="col-sm-4">
+    <%= form.text_field :nombre, class:'form-control', id:"nombre" %>
+  </div>
+  </div>
+
+  <div  class="form-group row">
+    <%= form.label :caracteristicas,"Características:", class:'col-sm-2'  %>
+    <div class="col-sm-4">
+    <%= form.text_field :caracteristicas , class:'form-control', id:"caracteristicas"%>
+  </div>
+  </div>
+
+  <div  class="form-group row">
+    <%= form.label :existencia,"Existencia:", class:'col-sm-2'  %>
+    <div class="col-sm-4">
+    <%= form.number_field :existencia, class:'form-control', id: "existencia" %>
+  </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :estatus,"Estatus:", class:'col-sm-2' %>
+    <div class="col-sm-4">
+    <%= form.select :estatus, ["Guardado", "En uso", "Nuevo"], prompt: "Seleccione el estatus" , class: 'form-control', id:"estatus" %>
+  </div>
+  </div>
+  <br/>
+
+  <div>
+  <button  class="btn btn-info  btn-xs round btn-guardar"  <%= form.submit %>Guardar </button>
+  <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"%>
+  <%= link_to "Regresar", resources_path, class: "btn btn-success btn-xs round btn-regresar "  %>
+  </div>
+<% end %>

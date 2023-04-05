@@ -1,4 +1,13 @@
-<h1>Departaments</h1>
+<head>
+<%= stylesheet_link_tag "style" %>
+</head>
+<div align="center">
+<p style="color: green"><%= notice %></p>
+<ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Departamento</a></li>
+          <li class="breadcrumb-item active">Listar departamento</li>
+        </ol>
+<h4>Departamentos</h4>
 
 <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
@@ -15,7 +24,7 @@
                       <th scope="col">ID</th>
                       <th>NOMBRE</th>
                       <th>Num_equipo</th>
-                      <th>Area</th>
+                     
                       <th>Acciones</th>
                      
                       
@@ -28,15 +37,17 @@
                         <td><%= departamento.id %></td>
                         <td><%= departamento.nombre %></td>
                         <td><%= departamento.num_equipos %></td>
-                        <td><%= departamento.room.nombre   %></td>
-                      <td > 
-                           <a href="<%= edit_departament_path(@departaments)%>" class="edit"><i class="bi bi-pencil-square"></i></a>
-                
+                        <td > 
+                      <% if can? :edit, Departament%>
+                      <a href="<%= edit_departament_path(departamento)%>" class="edit"><i class="bi bi-pencil-square"></i></a>
+                      <%end%>
+                      <% if can? :show, Departament%>
                       <a  class="mostrar"  <%= link_to ({:action => :show, :id => departamento.id}) do %><i class="bi bi-eye-fill"></i><%end%></a> 
-                     
+                      <%end%>
+                      <%if can? :destroy, Departament%> 
                        <a class="eliminar" <%= link_to ({ :action => :destroy, :id => departamento.id })do%>
                       <i class="bi bi-trash"></i>
-                    
+                      <%end%>
                       <% end %>
                       </a>
 
@@ -47,10 +58,8 @@
                 
                 
                 <% end %>
-                    <a href="<%= new_departament_path %>" class="new"><i class="bi bi-plus-circle-fill"></i></a>
-                  
-                    
-                    </div>
+                    <a href="departaments/new" class="new"><i class="bi bi-plus-circle-fill"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -64,4 +73,18 @@
               }
               });
       } );
-            </script>
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

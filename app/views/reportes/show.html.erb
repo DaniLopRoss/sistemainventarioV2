@@ -1,19 +1,28 @@
 <head>
 <%= stylesheet_link_tag "style" %>
 </head>
-<p style="color: green"><%= notice %></p>
+
 <div class="container">
 <div class="card mt-5">
 <div class="card-header">
+<ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Reporte</a></li>
+          <li class="breadcrumb-item active">Caracteristicas reporte</li>
+        </ol>
+                  <h5 class="text">Reporte  <%= @reporte.id%> </h5>
 
-<h4 class="text">Reporte</h4>
 </div>
  <div class="probar">
 <%= render @reporte %>
 
 <div>
-  <%= link_to "Editar reporte", edit_reporte_path(@reporte) %> |
-  <%= link_to "Regresar reportes", reportes_path %>
+<% if can? :edit, Reporte%>
+  <%= link_to "Editar", edit_reporte_path(@reporte),   class: "btn btn-warning btn-xs round btn-editar " %> 
+   <%end%> 
+   <%if can? :destroy, Reporte%>
+    <%= link_to "Eliminar reporte", @reporte, method: :delete, data: { confirm: "Esta seguro de eliminar"},  class: "btn btn-danger btn-eliminar" %>
+  <%end%>
+  <%= link_to "Regresar", reportes_path,  class: "btn btn-success btn-xs round btn-regresar " %>
 
-  <%= button_to "Eliminar reporte", @reporte, method: :delete %>
+
 </div>

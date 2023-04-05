@@ -1,0 +1,35 @@
+  <head>
+  <%= stylesheet_link_tag "style" %>
+  </head>
+
+  <div class="container">
+  <div class="card mt-5">
+  <div class="card-header">
+  <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Área</a></li>
+            <li class="breadcrumb-item active">Caracteristicas área</li>
+          </ol>
+                    <h5 class="text">Área  <%= @zone.id%> </h5>
+  </div>
+  <div class="probar">
+  
+
+<strong>Nombre:</strong>
+    <%= @zone.nombre %>
+  </p>
+   <strong>Departamento:</strong>
+    <%= @zone.departament.nombre %>
+  </p>
+<br>
+</br>
+<div>
+<% if can? :edit, Zone%>
+  <%= link_to "Editar ", edit_zone_path(@zone),  class: "btn btn-warning btn-xs round btn-editar "  %> 
+   <%end%> 
+   <%  if can? :destroy, @zone%>
+    <%= link_to "Eliminar", @zone, method: :delete , data: { confirm: "Está seguro de eliminar"},  class: "btn btn-danger btn-eliminar" %>
+    <%end%>
+  <%= link_to "Regresar", zones_path,  class: "btn btn-success btn-xs round btn-regresar "  %>
+<br>
+</br>
+</div>

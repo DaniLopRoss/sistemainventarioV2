@@ -15,7 +15,8 @@
 //=require datatables
 //=require_tree
 
-
+//require hotwired_turbo-rails
+//require controller
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

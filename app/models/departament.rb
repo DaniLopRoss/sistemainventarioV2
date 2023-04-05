@@ -1,3 +1,6 @@
 class Departament < ApplicationRecord
-    belongs_to :room
+         validates :nombre, :num_equipos, :presence => true 
+
+         validates :nombre , :uniqueness => true      
+         has_many :zones
 end

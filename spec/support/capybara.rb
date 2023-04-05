@@ -1,5 +1,7 @@
 require 'capybara/rspec'
 
+#...
+
 RSpec.configure do |config|
 
   config.use_transactional_fixtures = false
@@ -44,7 +46,5 @@ RSpec.configure do |config|
   config.append_after(:each) do
     DatabaseCleaner.clean
   end
-
-  Capybara.ignore_hidden_elements = false
 
 end
