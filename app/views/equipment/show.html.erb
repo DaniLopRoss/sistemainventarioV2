@@ -1,156 +1,142 @@
-<head>
 <%= stylesheet_link_tag "style" %>
 </head>
 
 <div class="container">
-<div class="card mt-5">
-<div class="card-header">
-<ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="">Equipo</a></li>
-          <li class="breadcrumb-item active">Características del equipo</li>
-        </ol>
-               <h5 class="text">Equipo <%= @equipment.id%> </h5>
-</div>
- <div class="probar">
+  <div class="card mt-5">
+    <div class="card-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="">Equipo</a></li>
+        <li class="breadcrumb-item active">Características del equipo</li>
+      </ol>
+      <h5 class="text">Equipo <%= @equipment.id%> </h5>
+    </div>
 
- <div class="form-group row ">
- <section>
-                           <div class="form-group row ">
-                           <%= label :Marca ,'Marca:', class:'col-sm-2'%>
-                           <div class="col-sm-4">
-                           <%= @equipment.brand.nombre%>
-                           </div>
-                          </div>
+    <div class="probar">
+      <div class="form-group row ">
 
-                           <div class="form-group row">
-                           <%= label :Modelo ,'Modelo:', class:'col-sm-2'%>
-                           <div class="col-sm-4">
-                           <%= @equipment.modelo%>
-                           </div>
-                           </div>
+        <div class="form-group row ">
+          <%= label :Marca ,'Marca:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%= @equipment.brand.nombre%>
+          </div>
+        </div>
 
-                           <div class="form-group row">
-                           <%= label :Serial ,'Serial:', class:'col-sm-2'%>
-                           <div class="col-sm-4">
-                           <%= @equipment.serial%>
-                           </div>
-                       </div>
+        <div class="form-group row">
+          <%= label :Modelo ,'Modelo:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%= @equipment.modelo%>
+          </div>
+        </div>
 
-                      
-                       <div class="form-group row">
-                       <%= label :Departamento ,'Departamento:', class:'col-sm-2'%>
-                       <div class="col-sm-4">
-                       <%= @equipment.zone.departament.nombre %>
-                           
-                       
-                       </div>
-                            </div>
-                            <div class="form-group row">
-                            <%= label :tipo ,'Tipo:', class:'col-sm-2' %>
-                             <div class="col-sm-4">
-                             <%= @equipment.shape.nombre%>
-                                  
-                             </div>
-                             </div>
+        <div class="form-group row">
+          <%= label :Serial ,'Serial:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%= @equipment.serial%>
+          </div>
+        </div>
 
-                           <div class="form-group row">
-                           <%= label :Area ,'Area:', class:'col-sm-2'%>
-                           <div class="col-sm-4">
-                           <%=@equipment.zone.nombre%>
-                           </div>
-                           </div>
-           
-                           
-                              <div class="form-group row">
-                              <%= label :Estatus ,'Estatus:' ,class:'col-sm-2'%>
-                                  <div class="form-group col-sm-4">
-                                 <%= @equipment.estatus %>
-                                  </div>
-                              </div>
+        <div class="form-group row">
+          <%= label :Departamento ,'Departamento:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%= @equipment.zone.departament.nombre %>
 
-                              <div class="form-group row">
-                              <%= label :Observaciones ,'Observaciones:', class:'col-sm-2'%>
-                              <div class="col-sm-4">
-                              <%= @equipment.observaciones%>
-                              </div>
-                          </div>
-                          
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= label :tipo ,'Tipo:', class:'col-sm-2' %>
+          <div class="col-sm-4">
+            <%= @equipment.shape.nombre%>
 
-                          <div class="form-group row ">
-                          <%= label :RAM ,'RAM:', class:'col-sm-2'%>
-                              <div class="col-sm-4">
-                              <%= @equipment.ram%>
-                                 </div>
-                          </div>
-           
+          </div>
+        </div>
 
-                          <div class="form-group row">
-                          <%= label :Disco_duro,'Disco duro:', class:'col-sm-2' %>
-                             
-                              <div class="col-sm-4">
-                              <%= @equipment.disco_duro%>
-                              </div>
-                          </div>
-                          </div>
-                        
+        <div class="form-group row">
+          <%= label :Area ,'Área:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%=@equipment.zone.nombre%>
+          </div>
+        </div>
 
-                        <div class="form-group row">
-                          <%= label :Licence,'licencia:', class:'col-sm-2' %>
-                             
-                              <div class="col-sm-4">
-                              <%= @equipment.licence.nombre%>
-                              </div>
-                          </div>
-                          </div>
-                         <div>
-                             <div>
-                             <%= link_to "Regresar a equipo", equipment_index_path , class: "btn btn-warning btn-xs round btn-editar " %>
-                             <% if can? :edit , @equipment%>
-                             <%= link_to "Editar  equipo", edit_equipment_path(@equipment), class: "btn btn-success btn-xs round btn-regresar "%>
-                             <%end %>
-                             <%if can? :destroy, @equipo12%>
-                             <%= link_to "Eliminar equipo", equipment_path(@equipment), method: :delete, data: { confirm: "Esta seguro de eliminar"}, class: "btn btn-danger btn-eliminar" %>
-                             <%end%>
-                             </div>
-                             </div>
-                             <br>
+        <div class="form-group row">
+          <%= label :Estatus ,'Estatus:' ,class:'col-sm-2'%>
+          <div class="form-group col-sm-4">
+            <%= @equipment.estatus %>
+          </div>
+        </div>
 
+        <div class="form-group row">
+          <%= label :Observaciones ,'Observaciones:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%= @equipment.observaciones%>
+          </div>
+        </div>
 
-                  
-                <% @equipment.maintenance.each do |maintenance|%>
-                <table class="table table-bordered" id="tablaman">
-                  <thead class="thead-blue" >
-              <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Fecha inicio</th>
-              <th scope="col">Fecha fin </th>
-              <th scope="col">Observaciones</th>
-              <th scope="col">Tipo de manteniminto</th>
-              <th scope="col">Usuario</th>
-              
-              </tr>
-              </thead>
+        <div class="form-group row ">
+          <%= label :RAM ,'RAM:', class:'col-sm-2'%>
+          <div class="col-sm-4">
+            <%= @equipment.ram%>
+          </div>
+        </div>
 
-              <tbody>
-                <tr>
-                  <td> <%= maintenance.id%>    </td>
-                  <td> <%= maintenance.fecha_fin%>    </td>
-                  <td> <%= maintenance.fecha_inicio%>    </td>
-                  <td> <%= maintenance.observaciones%>    </td>
-                  <td> <%= maintenance.tipo_mantenimiento%>    </td>
-                  <td> <%= maintenance.usuarios_id%>    </td>
-                  
-                  <ul>
-                  
-                  </ul>
-                </tr>
-                <%end%>
-                </tbody>
-              
-</div>
+        <div class="form-group row">
+          <%= label :Disco_duro,'Disco duro:', class:'col-sm-2' %>
 
+          <div class="col-sm-4">
+            <%= @equipment.disco_duro%>
+          </div>
+        </div>
+      </div>
 
-                           
+      <div class="form-group row">
+        <%= label :Licence,'Licencia:', class:'col-sm-2' %>
 
+        <div class="col-sm-4">
+          <%= @equipment.licence.nombre%>
+        </div>
+      </div>
+      <br>
+      </br>
+      <div>
+        <% if can? :edit , @equipment%>
+        <%= link_to "Editar", edit_equipment_path(@equipment), class: "btn btn-warning btn-xs round btn-editar "%>
+        <%end %>
+        <%if can? :destroy, @equipo12%>
+        <%= link_to "Eliminar ", equipment_path(@equipment), method: :delete, data: { confirm: "Esta seguro de eliminar"}, class: "btn btn-danger btn-eliminar" %>
+        <%end%>
+        <%= link_to "Regresar", equipment_index_path , class: "btn btn-success btn-xs round btn-regresar " %>
 
-                             </section>
+      </div>
+    </div>
+
+    <br>
+    </br>
+
+    <% @equipment.maintenance.each do |maintenance|%>
+    <table class="table table-bordered" id="tablaman">
+      <thead class="thead-blue">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Fecha inicio</th>
+          <th scope="col">Fecha fin </th>
+          <th scope="col">Observaciones</th>
+          <th scope="col">Tipo de manteniminto</th>
+          <th scope="col">Usuario</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td> <%= maintenance.id%> </td>
+          <td> <%= maintenance.fecha_fin%> </td>
+          <td> <%= maintenance.fecha_inicio%> </td>
+          <td> <%= maintenance.observaciones%> </td>
+          <td> <%= maintenance.tipo_mantenimiento%> </td>
+          <td> <%= maintenance.usuarios_id%> </td>
+
+          <ul>
+
+          </ul>
+        </tr>
+        <%end%>
+      </tbody>

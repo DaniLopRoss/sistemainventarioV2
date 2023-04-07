@@ -16,7 +16,9 @@ class MaintenancesController < ApplicationController
   # GET /maintenances/new
   def new
     @maintenance = Maintenance.new
+    @equipment = Equipment.find(params[:equipment_id])
     @time_now = Time.new.strftime("%Y-%m-%dT%T")
+    
 
     @usuario_logiado= current_usuario.id
   end
@@ -29,7 +31,8 @@ class MaintenancesController < ApplicationController
   # POST /maintenances or /maintenances.json
   def create
     @maintenance = Maintenance.new(maintenance_params)
-   
+    @maintenance.equipment_id = params[:maintenance][:equipment_id] # Aquí asignas el equipment_id al mantenimiento
+  
     respond_to do |format|
       if @maintenance.save
         format.html { redirect_to maintenance_url(@maintenance), notice: "El mantenimiento se ha creado correctamente." }
@@ -40,7 +43,7 @@ class MaintenancesController < ApplicationController
       end
     end
   end
-
+  
   # PATCH/PUT /maintenances/1 or /maintenances/1.json
   def update
     respond_to do |format|
@@ -72,7 +75,7 @@ class MaintenancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def maintenance_params
-      params.require(:maintenance).permit(:fecha_inicio, :fecha_fin, :observaciones, :tipo_mantenimiento, :equipment_id, :zone_id, :physical_id, :tool_id, :resources_id, :usuarios_id,:nombre)
+      params.require(:maintenance).permit(:fecha_inicio, :fecha_fin, :observaciones, :tipo_mantenimiento, :equipment_id, :zone_id, :physical_id, :tool_id, :resource_id, :usuario_id,:nombre)
 
     end
 end

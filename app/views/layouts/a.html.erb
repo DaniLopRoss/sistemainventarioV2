@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sistema</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag  "style" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+   
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.bootstrap5.min.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+     
+   
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end " id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom">Sistema de Inventario </div>
+            <div class="list-group list-group-flush">
+
+                <aside id="sidebar" class="sidebar">
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse">
+                                <i class="bi bi-people"></i><span class="side">Usuarios</span><i
+                                    class="bi bi-chevron-down "></i>
+                            </a>
+                            <ul id="usuarios-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                                <li class="listas">
+
+                                    <a href="<%= new_usuario_path %>" class="sidebar"> Registrar Usuarios</a>
+                                </li>
+                                <li class="listas">
+                                    <a href="<%= usuarios_path%>" class="sidebar"> Listar usuarios</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="bi bi-person-bounding-box"></i>
+                                        Gestionar usuarios
+                                        <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="bi bi-person-check"></i>
+                                                Activar usuarios
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="bi bi-person-x"></i>
+                                                Desactivar usuarios
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                        <a class="nav-link collapsed" data-bs-target="#area-nav" data-bs-toggle="collapse">
+                          <i class="bi bi-people"></i><span class="side">Áreas</span><i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul id="area-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                          <li class="listas">
+                            <a href="<%= new_zone_path%>" class="sidebar" > Registrar áreas</a>
+                          </li>
+                          <li class="listas">
+                            <a href="<%= zones_path%>" class="sidebar" > Listar áreas</a>
+                          </li>
+                        </ul>
+                      </li>
+
+                      
+                        <li class="list-group-item">
+                            <a class="nav-link collapsed" data-bs-target="#licencia-nav" data-bs-toggle="collapse">
+                                <i class="bi bi-people"></i><span class="side">Licencias</span><i
+                                    class="bi bi-chevron-down "></i>
+                            </a>
+                            <ul id="licencia-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                                <li class="listas">
+
+                                    <a href="<%= new_licence_path%>" class="sidebar"> Registrar licencia</a>
+                                </li>
+                                <li class="listas">
+                                    <a href="<%= licences_path%>" class="sidebar"> Listar licencia</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="list-group-item">
+                            <a class="nav-link collapsed" data-bs-target="#departamneto-nav" data-bs-toggle="collapse">
+                                <i class="bi bi-people"></i><span class="side">Departamentos</span><i
+                                    class="bi bi-chevron-down "></i>
+                            </a>
+                            <ul id="departamneto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                                <li class="listas">
+
+                                    <a href="<%= new_departament_path%>" class="sidebar"> Registrar departamento</a>
+                                </li>
+                                <li class="listas">
+                                    <a href="<%= departaments_path%>" class="sidebar"> Listar departamento</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="nav-link collapsed" data-bs-target="#mantenimiento-nav" data-bs-toggle="collapse">
+                                <i class="bi bi-people"></i><span class="side">Mantenimiento</span><i
+                                    class="bi bi-chevron-down "></i>
+                            </a>
+                            <ul id="mantenimiento-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                                <li class="listas">
+
+                                    <a href="<%= new_maintenance_path%>" class="sidebar"> Registrar mantenimiento</a>
+                                </li>
+                                <li class="listas">
+                                    <a href="<%= maintenances_path%>" class="sidebar"> Bitácoras</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="nav-link collapsed" data-bs-target="#solicitud-nav" data-bs-toggle="collapse">
+                                <i class="bi bi-people"></i><span class="side">Solicitud</span><i
+                                    class="bi bi-chevron-down "></i>
+                            </a>
+                            <ul id="solicitud-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                                <li class="listas">
+
+                                    <a href="<%= new_solicitud_path%>" class="sidebar"> Registrar solicitud</a>
+                                </li>
+                                <li class="listas">
+                                    <a href="<%= new_solicitud_path%>" class="sidebar"> Listar solicitud</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+
+
+
+                        <li class="list-group-item">
+                        <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse">
+                            <i class="bi bi-people"></i><span class="side">Catálogos</span><i
+                                class="bi bi-chevron-down "></i>
+                        </a>
+                        <ul id="usuarios-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                           
+                            <li class="listas">
+                                <a href="#">
+                                    <i class="bi bi-person-bounding-box"></i>
+                                    Tipos
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                                <ul>
+                                    <li class="listas">
+                                    <a href="<%= new_shape_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar tipos</a> 
+                                    </li>
+                                    <li class="listas">
+                                    <a href="<%= shapes_path%>" class="edit"> <i class="bi bi-circle"></i>Listar tipos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+              
+
+                        </lu>
+
+                </aside><!-- End Sidebar-->
+
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="line-height: 0.7;">
+                <div class="container-fluid">
+
+                    <a class="bis bi-list" id="sidebarToggle" style="font-size:27px; margin-left: 10px;"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+
+                            </li>
+                            <li class="nav-item active"><a class="nav-link" href="/">Inicio</span></a></li>
+
+                            <li class="nav-item active">
+                                <% if usuario_signed_in? %>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <strong><%= current_usuario.email %></strong></a>
+                                <p class="user-info"><%= current_usuario.nombre %> <%= current_usuario.apellidouno %> |
+                                    <%= current_usuario.role %></p>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item"
+                                        <%= link_to "Cerrar sesion ", destroy_usuario_session_path  %></a> </li>
+                                        <%else%> <li class="nav-item active">
+                                        <a class="dropdown-item"
+                                            <%= link_to "Crear cuenta ",new_usuario_registration_path %></a> <a
+                                            class="dropdown-item"
+                                            <%= link_to "Iniciar sesion  ",new_usuario_session_path %></a> </li>
+                                            <%end %> </ul> </div> </div> </nav> <!-- Page content-->
+                                            <div class="container-fluid">
+
+                                                <% if notice %>
+                                                <p class="alert alert-success"><%= notice %></p>
+                                                <% end %>
+                                                <% if alert %>
+                                                <p class="alert alert-danger"><%= alert %></p>
+                                                <% end %>
+
+                                                <%= yield %>
+
+                                            </div>
+
+                                            <!-- Bootstrap core JS-->
+                                            <script
+                                                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
+
+                                            </script>
+
+                                           
+
+                                            <script>
+                                                window.addEventListener('DOMContentLoaded', event => {
+                                                    // Toggle the side navigation
+                                                    const sidebarToggle = document.body.querySelector(
+                                                        '#sidebarToggle');
+                                                    if (sidebarToggle) {
+                                                        // Uncomment Below to persist sidebar toggle between refreshes
+                                                        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                                                        //     document.body.classList.toggle('sb-sidenav-toggled');
+                                                        // }
+                                                        sidebarToggle.addEventListener('click', event => {
+                                                            event.preventDefault();
+                                                            document.body.classList.toggle(
+                                                                'sb-sidenav-toggled');
+                                                            localStorage.setItem('sb|sidebar-toggle',
+                                                                document.body.classList.contains(
+                                                                    'sb-sidenav-toggled'));
+                                                        });
+                                                    }
+                                                });
+                                            </script>
+                                        
+
+
+
+
+
+</body>
+
+</html>

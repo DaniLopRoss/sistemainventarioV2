@@ -1,126 +1,118 @@
 <%= form_with(model: maintenance) do |f| %>
-  <% if maintenance.errors.any? %>
-    <div style="color: red">
-      
-      <ul>
-        <% maintenance.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<% if maintenance.errors.any? %>
+<div style="color: red">
+
+  <ul>
+    <% maintenance.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<br>
+<div class="form-group row">
+  <%= f.label :nombre, 'Nombre:',  class:'col-sm-2'%>
+  <div class="form-group col-sm-4">
+
+    <%= f.text_field :nombre, class:'form-control'%>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= f.label :fecha_inicio,'Fecha de inicio:', class:'col-sm-2'%>
+  <div class="form-group col-sm-4">
+
+    <%= f.datetime_field :fecha_inicio ,value: @time_now, class:'form-control'%>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= f.label :Fecha_de_termino ,"Fecha de termino:", class:'col-sm-2'%>
+  <div class="form-group col-sm-4">
+
+    <%= f.datetime_field :fecha_fin , class:'form-control', min: Date.today%>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= f.label :Observaciones, "Observaciones:", class: 'col-sm-2' %>
+  <div class="form-group col-sm-4">
+    <%= f.text_area :observaciones, class: 'form-control custom-textarea' %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= f.label :Tipo_de_mantenimiento , "Tipo:",class:'col-sm-2'%>
+  <div class="form-group col-sm-4">
+    <div class="placeholder">
+      <%= f.select :tipo_mantenimiento , ["Servicios",  "Infraestructura"], prompt: "Seleccione el tipo de mantenimiento" %>
     </div>
-  <% end %>
-
+  </div>
   <br>
-                   <div class="form-group row">
-                        <%= f.label :nombre, 'Nombre:',  class:'col-sm-2'%>
-                            <div class="form-group col-sm-4" >
+ 
 
-                           <%= f.text_field :nombre, class:'form-control'%>
-                           </div>
-                    </div> 
-   
-                                         
-                        <div class="form-group row">
-                        <%= f.label :fecha_inicio,'Fecha de inicio:', class:'col-sm-2'%>
-                            <div class="form-group col-sm-4" >
+  <div class="form-group row hidden"">
+    <%= f.label :equipment_id,"ID",class:'col-sm-2' %>
+    <div class="col-sm-4">
+      <%= f.hidden_field :equipment_id, value: @equipment.id %>
+    </div>
+  </div>
 
-                           <%= f.datetime_field :fecha_inicio ,value: @time_now, class:'form-control'%>
-                           </div>
-                    </div> 
-                     
+  <div class="form-group row">
+    <%= f.label :zone_id, "Área:" , class:'col-sm-2'%>
+    <div class="col-sm-4">
+      <div class="placeholder">
+        <%= f.collection_select( :zone_id, Zone.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione la área")%>
+      </div>
+    </div>
+  </div>
 
-                    <div class="form-group row">
-                           <%= f.label :Fecha_de_termino ,"Fecha de termino:", class:'col-sm-2'%>
-                           <div class="form-group col-sm-4" >
+  <div class="form-group row">
+    <%= f.label :physical_id, "Materiales:" , class:'col-sm-2'%>
+    <div class="col-sm-4">
+      <div class="placeholder">
+        <%= f.collection_select( :physical_id, Physical.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione el material")%>
+      </div>
+    </div>
+  </div>
 
-                           <%= f.datetime_field :fecha_fin , class:'form-control', min: Date.today%>
-                           </div>
-                    </div> 
+  <div class="form-group row">
+    <%= f.label :tool_id, "Herramienta:" , class:'col-sm-2'%>
+    <div class="col-sm-4">
+      <div class="placeholder">
+        <%= f.collection_select( :tool_id, Tool.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione la herramienta")%>
+      </div>
+    </div>
+  </div>
 
-                    <div class="form-group row">
-                    <%= f.label :Observaciones, "Observaciones:", class: 'col-sm-2' %>
-                    <div class="form-group col-sm-4">
-                      <%= f.text_area :observaciones, class: 'form-control custom-textarea' %>
-                    </div>
-                  </div>
-                  
+  <div class="form-group row">
+    <%= f.label :resource_id, "Insumo:" , class:'col-sm-2'%>
+    <div class="col-sm-4">
+      <div class="placeholder">
+        <%= f.collection_select(:resource_id, Resource.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione el insumo")%>
+      </div>
+    </div>
+  </div>
 
-                    <div class="form-group row">
-                         <%= f.label :Tipo_de_mantenimiento , "Tipo:",class:'col-sm-2'%>
-                         <div class="form-group col-sm-4">
-                         <div class="placeholder">
-                          <%= f.select :tipo_mantenimiento , ["Servicios",  "Infraestructura"], prompt: "Seleccione el tipo de mantenimiento" %>
-                          </div>
-                    </div> 
-                  <br>
-                  <div class="form-group row ">
-                       <%= f.label :equipment_id,"Serie del equipo:" , class:'col-sm-2'%>
-                       <div class="col-sm-4">
-                       <%= f.collection_select( :equipment_id, Equipment.all , :id, :id,class: 'form-control', prompt: "Seleccione la id del equipo")%>
-                       </div>
-                       </div>
+  <div class="form-group row">
+    <%= f.label :usuario_id, "Usuario:" , class:'col-sm-2'%>
+    <div class="col-sm-4">
+      <%= f.text_field :usuario_id, value: @usuario_logiado , :readonly => true , class: "form-control-plaintext"%>
+    </div>
+  </div>
 
-                    <div class="form-group row">
-                       <%= f.label :zone_id, "Área:" , class:'col-sm-2'%>
-                       <div class="col-sm-4">
-                       <div class="placeholder">
-                       <%= f.collection_select( :zone_id, Zone.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione la área")%>
-                        </div>
-                       </div>
-                            </div>
+  <%end %>
+  <br>
+  </br>
+  <br>
+  </br>
+  <div>
+    <button type="submit" class="btn btn-info  btn-xs round btn-guardar">Guardar</button>
+    <%= link_to 'Cancelar', maintenances_path, class: "btn btn-warning btn-xs round btn-cancelar"  %>
 
-                     <div class="form-group row">
-                       <%= f.label :physical_id, "Materiales:" , class:'col-sm-2'%>
-                       <div class="col-sm-4">
-                       <div class="placeholder">
-                       <%= f.collection_select( :physical_id, Physical.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione el material")%>
-                        </div>
-                       </div>
-                            </div>
+  </div>
+  <br>
+  </br>
 
-                           <div class="form-group row">
-                       <%= f.label :tool_id, "Herramienta:" , class:'col-sm-2'%>
-                       <div class="col-sm-4">
-                       <div class="placeholder">
-                       <%= f.collection_select( :tool_id, Tool.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione la herramienta")%>
-                        </div>
-                       </div>
-                            </div>
-              
-
-                        
-                            <div class="form-group row">
-                       <%= f.label :resources_id, "Insumo:" , class:'col-sm-2'%>
-                       <div class="col-sm-4">
-                       <div class="placeholder">
-                       <%= f.collection_select(:resources_id, Resource.order('nombre'), :id, :nombre, class:'form-control', prompt:"Seleccione el insumo")%>
-                        </div>
-                       </div>
-                            </div>
-
-                   <div class="form-group row">
-                       <%= f.label :usuarios_id, "Usuario:" , class:'col-sm-2'%>
-                       <div class="col-sm-4" >
-                       <%= f.text_field :usuarios_id, value: @usuario_logiado , :readonly => true , class: "form-control-plaintext"%>
-                        </div>
-                            </div>
-                            
-                         <%end %>
-                         <br>
-                            </br>
-                            <br>
-                            </br>
-                         <div>
-                 <button type="submit" class="btn btn-info  btn-xs round btn-guardar">Guardar</button>
-                 <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"  %>
-                 <%= link_to "Regresar", maintenances_path, class: "btn btn-success btn-xs round btn-regresar "  %>
-                                 
-                                  
-                          </div>
-                          <br>
-                          </br>
-                          
-</form>
-
-
-
+  </form>

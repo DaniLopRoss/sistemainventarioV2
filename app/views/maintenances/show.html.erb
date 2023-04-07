@@ -3,13 +3,13 @@
 </head>
 <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="">Mantenimiento</a></li>
-          <li class="breadcrumb-item active"> Caracteristicas de mantenimiento</li>
+          <li class="breadcrumb-item active"> Características de mantenimiento</li>
         </ol>
 <div class="container">
 <div class="card mt-5">
 <div class="card-header">
 
- <h4 class="text ">Mantenimiento <%= @maintenance.id %> </h4>
+ <h5 class="text ">Mantenimiento <%= @maintenance.id %> </h5>
 </div>
  <div class="probar">
 
@@ -68,9 +68,9 @@
       </div>
 
       <div class="form-group row">
-      <%= label :usuarios_id, 'Usuario', class: 'col-sm-2'%>
+      <%= label :usuario_id, 'Usuario', class: 'col-sm-2'%>
       <div class="col-sm-4">
-      <%= @maintenance.usuarios_id%>
+      <%= @maintenance.usuario_id%>
       </div>
       </div>
 
@@ -90,24 +90,26 @@
       </div>
 
       <div class="form-group row">
-      <%= label :resources_id, 'Insumo', class: 'col-sm-2'%>
+      <%= label :resource_id, 'Insumo', class: 'col-sm-2'%>
       <div class="col-sm-4">
-      <%= @maintenance.resources_id%>
+      <%= @maintenance.resource_id%>
       </div>
       </div>
 
       <br>
+      </br>
       
 
 <div>
 <% if can? :edit, @maintenance%>
-  <%= link_to "Editar mantenimiento", edit_maintenance_path(@maintenance), class: "btn btn-success btn-xs round" %>  <%end%>  |
-
-  <%= link_to "Regresar ", maintenances_path, class: "btn btn-success btn-xs round" %>
-   <% if can? :destroy, @maintenance%>
-  <%= button_to "Eliminar mantenimiento", @maintenance, method: :delete , data: { confirm: "Esta seguro de eliminar"},  class: "btn btn-danger"%>
+  <%= link_to "Editar ", edit_maintenance_path(@maintenance), class: "btn btn-warning btn-xs round btn-editar" %>
   <%end%>
-
+   <% if can? :destroy, @maintenance%>
+  <%= link_to "Eliminar", @maintenance, method: :delete , data: { confirm: "Esta seguro de eliminar"}, class: "btn btn-danger btn-eliminar"%>
+  <%end%>
+  <%= link_to "Regresar", maintenances_path, class: "btn btn-success btn-xs round btn-regresa"%>
+  <br>
+  </br>
 </div>
 
 

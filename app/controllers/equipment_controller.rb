@@ -19,6 +19,7 @@ class EquipmentController < ApplicationController
   # GET /equipment/new
   def new
     @equipment = Equipment.new
+
   end
 
   # GET /equipment/1/edit
@@ -28,6 +29,7 @@ class EquipmentController < ApplicationController
   # POST /equipment or /equipment.json
   def create
     @equipment = Equipment.new(equipment_params)
+    
 
     respond_to do |format|
       if @equipment.save

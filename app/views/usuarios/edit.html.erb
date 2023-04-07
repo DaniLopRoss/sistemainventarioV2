@@ -6,7 +6,7 @@
 <div class="card mt-5">
 <div class="card-header">
 
-<h4 class="text">Editar usuario </h4>
+<h5 class="text">Editar usuario </h5>
 </div>
  <div class="probar">
 
@@ -16,27 +16,27 @@
       
 
       <div class="form-group row" >
-      <%= f.label :nombre,'Nombre ',  class:'col-sm-2' %>
+      <%= f.label :nombre,'Nombre: ',  class:'col-sm-2' %>
       <div class="col-sm-4" >
       <%= f.text_field :nombre, autofocus: true %>
       </div>
       </div>
     
       <div class="form-group row">
-      <%= f.label :id, 'RFC', class:'col-sm-2' %>
+      <%= f.label :id, 'RFC:', class:'col-sm-2' %>
       <div class="col-sm-4">
       <%= f.text_field :id, class:"input" %>
       </div>
     </div>
     
          <div class="form-group row">
-        <%= f.label :apellidouno,'apellido paterno', class:'col-sm-2' %>
+        <%= f.label :apellidouno,'Apellido paterno:', class:'col-sm-2' %>
         <div class="col-sm-4">
         <%= f.text_field :apellidouno, class:"input" %>
       </div>
     
       <div class="form-group row">
-        <%= f.label :apellido_dos ,'apellido materno', class:'col-sm-2'%>
+        <%= f.label :apellido_dos ,'Apellido materno:', class:'col-sm-2'%>
         <div class="col-sm-4">
         <%= f.text_field :apellidodos, class:"input" %>
         </div>
@@ -44,7 +44,7 @@
     
     
       <div class="form-group row">
-      <%= f.label :role ,'Rol',   class:'col-sm-2'%>
+      <%= f.label :role ,'Rol:',   class:'col-sm-2'%>
       <div class="col-sm-4">
       <%= f.select :role, ["Administrador", "Agente", "Personal"] %>
       </div>
@@ -53,14 +53,14 @@
     
       
       <div class="form-group row">
-        <%= f.label :email , 'Correo' ,  class:'col-sm-2'%>
+        <%= f.label :email , 'Correo:' ,  class:'col-sm-2'%>
         <div class="col-sm-4">
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
       </div>
     
       <div class="form-group row">
-        <%= f.label :password,'Contraseña',  class:'col-sm-2' %>
+        <%= f.label :password,'Contraseña:',  class:'col-sm-2' %>
         <div class="col-sm-4">
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>

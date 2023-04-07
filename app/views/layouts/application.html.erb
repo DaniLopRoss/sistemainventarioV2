@@ -1,428 +1,321 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sistema</title>
-    
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag  "style" %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <%= javascript_include_tag 'application.js', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'datatables.js', 'data-turbolinks-track': 'reload' %>
 
-    
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css"/>
- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.bootstrap5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
-  
+<head>
+  <title>Sistema</title>
 
-    
-  </head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag  "style" %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-  <body>
-  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.bootstrap5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+
+</head>
+
+<body>
+
   <div class="d-flex" id="wrapper">
-  <!-- Sidebar-->
-  <div class="border-end " id="sidebar-wrapper">
-      <div class="sidebar-heading border-bottom" >Sistema de Inventario </div>
+    <!-- Sidebar-->
+    <div class="border-end " id="sidebar-wrapper">
+      <div class="sidebar-heading border-bottom">Sistema de Inventario </div>
       <div class="list-group list-group-flush">
-         
-      <aside id="sidebar" class="sidebar">
 
-      <ul class="sidebar-nav" id="sidebar-nav">
-  
-        
-        
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse" >
-          <i class="bi bi-people"></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="usuarios-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-            
-            <a href="<%= new_usuario_path %>" class="edit"> <i class="bi bi-circle"></i>Registrar Usuarios</a>
+        <aside id="sidebar" class="sidebar">
+
+          <ul class="list-group list-group-flush">
+            <% if current_usuario.role == "Administrador" %>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse">
+                <i class="bi bi-people"></i><span class="side">Usuarios</span><i class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="usuarios-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
+
+                  <a href="<%= new_usuario_path %>" class="sidebar"> Registrar Usuarios</a>
+                </li>
+                <li class="listas">
+                  <a href="<%= usuarios_path%>" class="sidebar"> Listar usuarios</a>
+                </li>
+
+              </ul>
             </li>
-            <li>
-            
-            <a href="<%= usuarios_path%>" class="edit"> <i class="bi bi-circle"></i>Listar usuarios</a>
+            <% end %>
+            <% if current_usuario.role == "Administrador" || current_usuario.role == "Agente" %>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#area-nav" data-bs-toggle="collapse">
+                <i class="bi bi-textarea"></i><span class="side">Áreas</span><i class="bi bi-chevron-down"></i>
+              </a>
+              <ul id="area-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
+                  <a href="<%= new_zone_path%>" class="sidebar"> Registrar áreas</a>
+                </li>
+                <li class="listas">
+                  <a href="<%= zones_path%>" class="sidebar"> Listar áreas</a>
+                </li>
+              </ul>
             </li>
-            <li>
-              
-          </ul>
-        </li>
-     
 
-        <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#areas-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-textarea"></i><span >Areas</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="areas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_zone_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar áreas</a>
-          </li>
-          <li>
-          <a href="<%= zones_path%>" class="edit"> <i class="bi bi-circle"></i>Listar áreas</a>
-          </li>
-          <li>
-            
-        </ul>
-      </li>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#licencia-nav" data-bs-toggle="collapse">
+                <i class="bi bi-card-list"></i><span class="side">Licencias</span><i class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="licencia-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
 
- <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse" href="">
-      <i class="bi bi-list-check"></i><span>Inventario</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="inventario-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-        <a href="<%=  equipment_index_path%>" class="edit"> <i class="bi bi-circle"></i>Equipos</a>
-        </li>
-         <li>
-          <a href="<%= tools_path%>" class="edit"> <i class="bi bi-circle"></i>Herramienta</a>
-          </li>
-          <li>
-          <a href="<%= physicals_path%>" class="edit"> <i class="bi bi-circle"></i> Materiales</a>
-          </li>
-        
-      </ul>
-    </li>
-    
+                  <a href="<%= new_licence_path%>" class="sidebar"> Registrar licencia</a>
+                </li>
+                <li class="listas">
+                  <a href="<%= licences_path%>" class="sidebar"> Listar licencia</a>
+                </li>
+              </ul>
+            </li>
 
-        <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#equipo12-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-pc-display"></i><span>Equipos</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="equipo12-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-         
-          <a href="<%= new_equipment_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar equipo</a>
-            </a>
-          </li>
-          <li>
-          <a href="<%= equipment_index_url%>" class="edit"> <i class="bi bi-circle"></i>Listar equipo</a>
-          </a>
-          </li>
-          <li>
-            
-        </ul>
-      </li>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#departamneto-nav" data-bs-toggle="collapse">
+                <i class="bi bi-building"></i><span class="side">Departamentos</span><i class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="departamneto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
 
-       
-       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#licencia-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-card-list"></i><span>Licencias</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="licencia-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_licence_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar licencia</a> 
-          </li>
-        
-          <li>
-          <a href="<%= licences_path%>" class="edit"> <i class="bi bi-circle"></i>Listar licencia </a>
-          </li>
-        </ul>
-      </li>
+                  <a href="<%= new_departament_path%>" class="sidebar"> Registrar departamento</a>
+                </li>
+                <li class="listas">
+                  <a href="<%= departaments_path%>" class="sidebar"> Listar departamento</a>
+                </li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#mantenimiento-nav" data-bs-toggle="collapse">
+                <i class="bi bi-pc-display"></i><span class="side">Mantenimiento</span><i
+                  class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="mantenimiento-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
 
+                  <a href="<%= new_maintenance_path%>" class="sidebar"> Registrar mantenimiento</a>
+                </li>
+                <li class="listas">
+                  <a href="<%= maintenances_path%>" class="sidebar"> Bitácoras</a>
+                </li>
+              </ul>
+            </li>
+            <% end %>
+            <% if current_usuario.role == "Administrador" || current_usuario.role == "Agente" || current_usuario.role == "Personal" %>
 
-      <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#departamento-nav" data-bs-toggle="collapse" href="">
-      <i class="bi bi-building"></i><span>Departamentos</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="departamento-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-        <a href="<%= new_departament_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar departamento</a>
-        </li>
-        <li>
-        <a href="<%= departaments_path%>" class="edit"> <i class="bi bi-circle"></i>Listar departamentos</a>
-        </li>
-        <li>
-          
-      </ul>
-    </li>
-        
-    <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tipos-nav" data-bs-toggle="collapse" href="">
-          <i class="bi bi-phone-vibrate"></i><span>Tipos</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tipos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_shape_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar tipos</a> 
-          </li>
-          <li>
-          <a href="<%= shapes_path%>" class="edit"> <i class="bi bi-circle"></i>Listar tipos</a>
-          </li>
-          
-            
-        </ul>
-      </li>
-        
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#marcas-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-list-columns"></i></i><span>Marcas</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="marcas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_brand_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar Marcas</a>
-          </li>
-          <li>
-          <a href="<%= brands_path%>" class="edit"> <i class="bi bi-circle"></i>Listar Marcas</a>
-          </li>
-          <li>
-            
-        </ul>
-      </li>
-         <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#materiales-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-battery"></i></i><span>Materiales</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="materiales-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_physical_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar Material</a>
-          </li>
-          <li>
-          <a href="<%= physicals_path %>" class="edit"> <i class="bi bi-circle"></i>Listar Materiales</a>
-          </li>
-          <li>
-            
-        </ul>
-      </li>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#solicitud-nav" data-bs-toggle="collapse">
+                <i class="bi bi-file-minus-fill"></i><span class="side">Solicitud</span><i
+                  class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="solicitud-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#herramienta-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-speedometer"></i></i><span>Herramientas</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="herramienta-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_tool_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar herramienta</a>
-          </li>
-          
-          <li>
-          <a href="<%= tools_path%>" class="edit"> <i class="bi bi-circle"></i>Listar herramienta</a>
-          </li>
-          <li>
-            
-        </ul>
-      </li>
+                  <a href="<%= new_solicitud_path%>" class="sidebar"> Registrar solicitud</a>
+                </li>
+                <li class="listas">
+                  <a href="<%= solicituds_path%>" class="sidebar"> Listar solicitud</a>
+                </li>
+              </ul>
+            </li>
+            <% end %>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#insumos-nav" data-bs-toggle="collapse" href="">
-        <i class="bi bi-memory"></i></i><span>Insumos</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="insumos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-          <a href="<%= new_resource_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar Insumo</a>
-          </li>
-          <li>
-          <a href="<%= resources_path%>" class="edit"> <i class="bi bi-circle"></i>Insumos</a>
-          </li>
-          <li>
-            
-        </ul>
-      </li>
+            <% if current_usuario.role == "Administrador" || current_usuario.role == "Agente" %>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse">
+                <i class="bi bi-list-check"></i><span class="side">Inventario</span><i class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="inventario-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li class="listas">
+                  <a class="nav-link collapsed" data-bs-target="#tipos-nav" data-bs-toggle="collapse">
+                    <span class="side1">Equipos</span><i class="bi bi-chevron-down"></i>
+                  </a>
+                  <ul id="tipos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="listasb">
+                      <a href="<%= new_equipment_path%>" class="sidebar">Registrar equipos</a>
+                    </li>
+                    <li class="listasb">
+                      <a href="<%= equipment_index_path%>" class="sidebar">Listar equipos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="listas">
+                  <a class="nav-link collapsed" data-bs-target="#Herramientas-nav" data-bs-toggle="collapse">
+                    <span class="side1">Herramientas</span><i class="bi bi-chevron-down"></i>
+                  </a>
+                  <ul id="Herramientas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="listasb">
+                      <a href="<%= new_tool_path%>" class="sidebar">Registrar herramientas</a>
+                    </li>
+                    <li class="listasb">
+                      <a href="<%= tools_path%>" class="sidebar">Listar herramientas</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="listas">
+                  <a class="nav-link collapsed" data-bs-target="#Materiales-nav" data-bs-toggle="collapse">
+                    <span class="side1">Materiales</span><i class="bi bi-chevron-down"></i>
+                  </a>
+                  <ul id="Materiales-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="listasb">
+                      <a href="<%= new_physical_path%>" class="sidebar">Registrar materiales</a>
+                    </li>
+                    <li class="listasb">
+                      <a href="<%= physicals_path%>" class="sidebar">Listar materiales</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
 
-      
-      
-      <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#maintenances-nav" data-bs-toggle="collapse" href="">
-      <i class="bi bi-pc-display"></i><span>Mantenimiento</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="maintenances-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-        <a href="<%=  new_maintenance_path%>" class="edit"> <i class="bi bi-circle"></i>Registrar mantenimiento</a>
-        </li>
-        <li>
-        <a href="<%= maintenances_path%>" class="edit"> <i class="bi bi-circle"></i>Bitacora</a>
-        </li> 
-      </ul>
-    </li>
+            <li class="list-group-item">
+              <a class="nav-link collapsed" data-bs-target="#catalogos-nav" data-bs-toggle="collapse">
+                <i class="bi bi-journals"></i><span class="side">Catálogos</span><i class="bi bi-chevron-down "></i>
+              </a>
+              <ul id="catalogos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#solicitud-nav" data-bs-toggle="collapse" href="">
-      <i class="bi bi-file-minus-fill"></i><span>Solicitud</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="solicitud-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-        <a href="<%=  new_solicitud_path%>" class="edit"> <i class="bi bi-circle"></i>Realizar solicitud</a>
-        </li>
-        <li>
-        <a href="<%= solicituds_path%>" class="edit"> <i class="bi bi-circle"></i>Solicitudes</a>
-        </li> 
-      </ul>
-    </li>
+                <li class="listas">
+                  <a class="nav-link collapsed" data-bs-target="#tipos-nav" data-bs-toggle="collapse">
+                    <span class="side1">Tipos</span><i class="bi bi-chevron-down"></i>
+                  </a>
+                  <ul id="tipos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="listasb">
+                      <a href="<%= new_shape_path%>" class="sidebar">Registrar tipos</a>
+                    </li>
+                    <li class="listasb">
+                      <a href="<%= shapes_path%>" class="sidebar">Listar tipos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="listas">
+                  <a class="nav-link collapsed" data-bs-target="#Marcas-nav" data-bs-toggle="collapse">
+                    <span class="side1">Marcas</span><i class="bi bi-chevron-down"></i>
+                  </a>
+                  <ul id="Marcas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="listasb">
+                      <a href="<%= new_brand_path%>" class="sidebar">Registrar marcas</a>
+                    </li>
+                    <li class="listasb">
+                      <a href="<%= brands_path%>" class="sidebar">Listar marcas</a>
+                    </li>
+                  </ul>
+                </li>
 
+                <li class="listas">
+                  <a class="nav-link collapsed" data-bs-target="#Insumos-nav" data-bs-toggle="collapse">
+                    <span class="side1">Insumos</span><i class="bi bi-chevron-down"></i>
+                  </a>
+                  <ul id="Insumos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="listasb">
+                      <a href="<%= new_resource_path%>" class="sidebar">Registrar insumos</a>
+                    </li>
+                    <li class="listasb">
+                      <a href="<%= resources_path%>" class="sidebar">Listar insumos</a>
+                    </li>
+                  </ul>
+                </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#reporte-nav" data-bs-toggle="collapse" href="">
-      <i class="bi bi-file-break-fill"></i><span>Reporte</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="reporte-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-        <a href="<%=  new_reporte_path%>" class="edit"> <i class="bi bi-circle"></i>Realizar reporte</a>
-        </li>
-        <li>
-        <a href="<%= reportes_path%>" class="edit"> <i class="bi bi-circle"></i>Reportes</a>
-        </li> 
-         
-      </ul>
-    </li>
+              </ul>
+            </li>
+            <% end %>
 
-    
+            </lu>
 
-
-
-
-
-
-
-    <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#catalogo-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-journal"></i><span>Catálogo</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="catalogo-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-      <li class="nav-item">
-        <a href="<%= new_shape_path%>" class="nav-link">Registrar Tipos</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= shapes_path%>" class="nav-link">Listar Tipos</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= new_brand_path%>" class="nav-link">Registrar Marcas</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= brands_path%>" class="nav-link">Listar Marcas</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= new_physical_path%>" class="nav-link">Registrar Materiales</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= physicals_path %>" class="nav-link">Listar Materiales</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= new_tool_path%>" class="nav-link">Registrar Herramientas</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= tools_path%>" class="nav-link">Listar Herramientas</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= new_resource_path%>" class="nav-link">Registrar Insumos</a>
-      </li>
-      <li class="nav-item">
-        <a href="<%= resources_path%>" class="nav-link">Listar Insumos</a>
-      </li>
-    </ul>
-  </li>
-  
-
-
-
-    
-
-
-
-
-  
-    
-  
-  
-      </ul>
-  
-    </aside><!-- End Sidebar-->
+        </aside><!-- End Sidebar-->
 
       </div>
-  </div>
-  <!-- Page content wrapper-->
-  <div id="page-content-wrapper">
+    </div>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
       <!-- Top navigation-->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-          <div class="container-fluid">
-          
-            <a class="bis bi-list" id="sidebarToggle" style="font-size:27px;"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                  <li class="nav-item active"> 
-                  
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="line-height: 0.7;">
+        <div class="container-fluid">
+
+          <a class="bis bi-list" id="sidebarToggle" style="font-size:27px; margin-left: 10px;"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+
+              </li>
+              <li class="nav-item active"><a class="nav-link" href="/">Inicio</span></a></li>
+              <br></br>
+              <li class="nav-item active">
+                <% if usuario_signed_in? %>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <strong><%= current_usuario.email %></strong></a>
+                <p class="user-info"><%= current_usuario.nombre %> <%= current_usuario.apellidouno %> |
+                  <%= current_usuario.role %></p>
+
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                  <a class="dropdown-item" <%= link_to "Cerrar sesion ", destroy_usuario_session_path  %></a>
+                  <a class="dropdown-item" <%= link_to "Cerrar sesion ", destroy_usuario_session_path  %></a>
                    </li>
-                      <li class="nav-item active"><a class="nav-link" href="/">Inicio</span></a></li>
-                     
-                      <li class="nav-item active">
-                      <% if usuario_signed_in? %>
-                          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <strong><%= current_usuario.email %></strong></a>
-                          <p class="user-info"><%= current_usuario.nombre %> <%= current_usuario.apellidouno %> | <%= current_usuario.role %></p>
-                         
-                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                          
-                              <a class="dropdown-item" <%= link_to "Cerrar sesion ", destroy_usuario_session_path  %></a>
-                            
-                              
-                              </li>
-                             <%else%>
-                             <li class="nav-item active">
-                              <a class="dropdown-item" <%= link_to "Crear cuenta ",new_usuario_registration_path %></a>
-                              <a class="dropdown-item" <%= link_to "Iniciar sesion  ",new_usuario_session_path %></a>
-                              </li>
-                              <%end %>
+                    <%else%> <li class="nav-item active">
+                    <a class="dropdown-item" <%= link_to "Crear cuenta ",new_usuario_registration_path %></a> 
+                    <a class="dropdown-item" <%= link_to "Iniciar sesion  ",new_usuario_session_path %></a> </li>
+                      <%end %> </ul> </div> </div> </nav> <!-- Page content-->
+                      <div class="container-fluid">
 
-                  </ul>
-              </div>
-          </div>
-      </nav>
-      <!-- Page content-->
-      <div class="container-fluid">
+                        <% if notice %>
+                        <p class="alert alert-success"><%= notice %></p>
+                        <% end %>
+                        <% if alert %>
+                        <p class="alert alert-danger"><%= alert %></p>
+                        <% end %>
 
-        <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
-        <% end %>
-      
-          <%= yield %>
-      
-</div>
+                        <%= yield %>
 
+                      </div>
+                </div>
 
+                <!-- Bootstrap core JS-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
 
+                </script>
 
+                <script>
+                  window.addEventListener('DOMContentLoaded', event => {
+                    // Toggle the side navigation
+                    const sidebarToggle = document.body.querySelector(
+                      '#sidebarToggle');
+                    if (sidebarToggle) {
+                      // Uncomment Below to persist sidebar toggle between refreshes
+                      // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                      //     document.body.classList.toggle('sb-sidenav-toggled');
+                      // }
+                      sidebarToggle.addEventListener('click', event => {
+                        event.preventDefault();
+                        document.body.classList.toggle(
+                          'sb-sidenav-toggled');
+                        localStorage.setItem('sb|sidebar-toggle',
+                          document.body.classList.contains(
+                            'sb-sidenav-toggled'));
+                      });
+                    }
+                  });
+                </script>
 
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script >
-
-window.addEventListener('DOMContentLoaded', event => {
-
-  // Toggle the side navigation
-  const sidebarToggle = document.body.querySelector('#sidebarToggle');
-  if (sidebarToggle) {
-      // Uncomment Below to persist sidebar toggle between refreshes
-      // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
-      //     document.body.classList.toggle('sb-sidenav-toggled');
-      // }
-      sidebarToggle.addEventListener('click', event => {
-          event.preventDefault();
-          document.body.classList.toggle('sb-sidenav-toggled');
-          localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-      });
-  }
-
-});
-
-</script>
 </body>
+
 </html>

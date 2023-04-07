@@ -9,7 +9,7 @@
           <li class="breadcrumb-item"><a href="">Solicitud</a></li>
           <li class="breadcrumb-item active">Editar la solicitud</li>
         </ol>
-                  <h4 class="text">Solicitud<%= @solicitud.id%> </h4>
+                  <h5 class="text">Solicitud<%= @solicitud.id%> </h5>
 </div>
  <div class="probar">
 
@@ -18,8 +18,4 @@
 <%= render "form", solicitud: @solicitud %>
 
 <br>
-
-<div>
-  <%= link_to "Ver solicitud", @solicitud %> |
-  <%= link_to "Regresar solicituds", solicituds_path %>
-</div>
+</br>
