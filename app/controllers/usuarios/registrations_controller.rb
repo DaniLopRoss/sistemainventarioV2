@@ -1,15 +1,20 @@
 class RegistrationsController < Devise::RegistrationsController
-  def create
-    @usuario = Usuario.new(user_params)
-    if @usuario.save
-      puts "Confirmation token: #{@usuario.confirmation_token}"
-      flash[:notice] = "¡Registro exitoso! Por favor verifica tu correo electrónico para confirmar tu cuenta."
-      redirect_to confirmation_instructions_path(:usuario, email: @usuario.email)
-    else
-      render :new
-    end
+ 
+  def build_resource(hash=nil)
+    super
+    self.resource.password_plain = hash[:password] if hash.present?
   end
   
+    def create
+      super do |resource|
+        if resource.persisted?
+          UserMailer.confirmation_instructions(resource).deliver_now
+        end
+      end
+    end
+    
+
+    
 
 
 
