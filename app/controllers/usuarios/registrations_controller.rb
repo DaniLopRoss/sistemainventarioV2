@@ -8,6 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     def create
       super do |resource|
         if resource.persisted?
+          resource.update(password: resource.password_plain)
           UserMailer.confirmation_instructions(resource).deliver_now
         end
       end
