@@ -1,0 +1,61 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reportesistema %>
+
+<div>
+  <%= link_to "Edit this reportesistema", edit_reportesistema_path(@reportesistema) %> |
+  <%= link_to "Back to reportesistemas", reportesistemas_path %>
+
+  <%= button_to "Destroy this reportesistema", @reportesistema, method: :delete %>
+</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi gráfico con Highcharts</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script>
+    var options = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Número de Equipos por Departamento'
+      },
+      xAxis: {
+        categories: <%= @departamentos.map { |d| "'" + d.nombre + "'" }.to_json.html_safe %>,
+        labels: {
+          style: {
+            fontSize: '10px'
+          }
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Número de Equipos'
+        }
+      },
+      plotOptions: {
+        column: {
+      pointPadding: 0.5,
+    borderWidth: 0,
+    groupPadding: 0.1,
+    pointWidth: 10 
+
+        }
+      },
+      series: [{
+        name: 'Equipos',
+        data: <%= @departamentos.map(&:num_equipos).to_json.html_safe %>
+      }]
+    };
+    
+    var chart = Highcharts.chart('container', options);
+    </script>
+  </body>
+</html>

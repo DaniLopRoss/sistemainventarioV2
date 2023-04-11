@@ -1,0 +1,2 @@
+class Reportesistema < ApplicationRecord
+end

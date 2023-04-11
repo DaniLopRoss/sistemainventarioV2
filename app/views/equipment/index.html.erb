@@ -1,5 +1,8 @@
 <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
   <%= stylesheet_link_tag "style" %>
+  <img src="/assets/logo.png" alt="Logo" class="logo-hidden">
+  <img src="/assets/logo2.png" alt="Logo2" class="logo-hidden">
 </head>
 <div align="center">
 
@@ -90,70 +93,123 @@
     </div>
   </div>
 
-  <script>
-    $(document).ready(function() {
-      var oTable = $("#equipostabla").DataTable({
-        language: {
-          url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
-        },
-        order: [
-          [1, 'asc']
-        ],
-        responsive: "true",
-        dom: 'Bfrtilp',
-        buttons: [{
-            extend: 'excelHtml5',
-            text: '<i class="bi bi-file-earmark-excel"></i> ',
-            titleAttr: 'Exportar a Excel',
-            className: 'btn btn-success'
-          },
-          {
-            extend: 'pdfHtml5',
-            text: '<i class="bi bi-file-earmark-pdf"></i> ',
-            titleAttr: 'Exportar a PDF',
-            className: 'btn btn-danger'
-          },
-          {
-            extend: 'print',
-            text: '<i class="bi bi-printer"></i> ',
-            titleAttr: 'Imprimir',
-            className: 'btn btn-info'
-          },
-        ],
-        columnDefs: [{
-          sortable: false,
-          "class": "index",
-          targets: 0
-        }],
-        order: [
-          [1, 'asc']
-        ],
-        fixedColumns: true
-      });
-      oTable.on('order.dt search.dt', function() {
-        oTable.column(0, {
-          search: 'applied',
-          order: 'applied'
-        }).nodes().each(function(cell, i) {
-          cell.innerHTML = i + 1;
-        });
-      }).draw();
-    });
-  </script>
+
 
   <script>
-    $(document).ready(function() {
-      var newEquipmentId = '<%= j flash[:new_equipment_id] %>';
-      if (newEquipmentId) {
-        var newEquipmentRow = document.getElementById('equipment-' + newEquipmentId);
-        if (newEquipmentRow) {
-          newEquipmentRow.classList.add('highlight');
-          newEquipmentRow.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-          newEquipmentRow.focus();
-        }
-      }
+  $(document).ready(function() {
+    
+    var logo = '/assets/logo.png';
+    var logo2 = '/assets/logo2.png';
+    var printableColumns = ':not(:last-child)';
+    var leyenda = 'TECNOLÓGICO NACIONAL DE MÉXICO';
+    var leyenda1 = 'Instituto Tecnológico de Oaxaca';
+    var oTable = $("#equipostabla").DataTable({
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
+      },
+      order: [
+        [1, 'asc']
+      ],
+      responsive: "true",
+      dom: 'Bfrtilp',
+      buttons: [{
+          extend: 'excelHtml5',
+          text: '<i class="bi bi-file-earmark-excel"></i> ',
+          titleAttr: 'Exportar a Excel',
+          className: 'btn btn-success',
+          exportOptions: {
+            columns: ':not(:last-child)'
+          }
+        },
+        {
+          extend: 'pdfHtml5',
+          text: '<i class="bi bi-file-earmark-pdf"></i> ',
+          titleAttr: 'Exportar a PDF',
+          className: 'btn btn-danger',
+          exportOptions: {
+            columns: ':not(:last-child)'
+          },
+          customize: function(doc) {
+           
+            var img1 = new Image();
+            img1.src = logo;
+            var imgData1 = getBase64Image(img1);
+          
+          
+            var img2 = new Image();
+            img2.src = logo2;
+            var imgData2 = getBase64Image(img2);
+          
+            doc.content.splice(0, 0, {
+              margin: [30, 0, 0, 12],
+              columns: [
+                {
+                  image: imgData2,
+                  width: 50,
+                  alignment: 'left'
+                },
+                {
+                  width: 'auto',
+                  alignment: 'center',
+                  stack: [
+                    { text: leyenda, margin: [90, 10, 0, 0] },
+                    { text: leyenda1, margin: [90, 10, 0, 0] }
+                  ]
+                },
+                {
+                  image: imgData1,
+                  width: 50,
+                  alignment: 'right',
+                  margin: [-70, 0, 0, 12]
+                }
+              ]
+            });
+            doc.content[1].margin = [0, 0, 70, 0];
+          }
+          
+        },
+        {
+          extend: 'print',
+          text: '<i class="bi bi-printer"></i> ',
+          titleAttr: 'Imprimir',
+          className: 'btn btn-info',
+          exportOptions: {
+            columns: ':not(:last-child)'
+          }
+          
+        },
+      ],
+      columnDefs: [{
+        sortable: false,
+        "class": "index",
+        targets: 0
+      }],
+      order: [
+        [1, 'asc']
+      ],
+      fixedColumns: true
     });
-  </script>
+    
+    oTable.on('order.dt search.dt', function() {
+      oTable.column(0, {
+        search: 'applied',
+        order: 'applied'
+      }).nodes().each(function(cell, i) {
+        cell.innerHTML = i + 1;
+      });
+    }).draw();
+    
+    // Función para convertir la imagen a base64
+    function getBase64Image(img) {
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      var dataURL = canvas.toDataURL("image/png");
+      return dataURL;
+    }
+  });
+</script>
+
+

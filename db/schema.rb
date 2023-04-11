@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_171816) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_08_051606) do
   create_table "brands", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_171816) do
     t.bigint "zone_id", null: false
     t.bigint "brand_id", null: false
     t.bigint "shape_id", null: false
-    t.bigint "licence_id", null: false
+    t.bigint "licence_id"
     t.index ["brand_id"], name: "index_equipment_on_brand_id"
     t.index ["departament_id"], name: "index_equipment_on_departament_id"
     t.index ["licence_id"], name: "index_equipment_on_licence_id"
@@ -96,6 +96,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_171816) do
     t.datetime "updated_at", null: false
     t.bigint "maintenance_id", null: false
     t.index ["maintenance_id"], name: "index_reportes_on_maintenance_id"
+  end
+
+  create_table "reportesistemas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "resources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

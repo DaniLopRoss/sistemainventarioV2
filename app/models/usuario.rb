@@ -6,7 +6,7 @@ class Usuario < ApplicationRecord
  
   validates :id, format: { with: /[A-ZÑ&]{3,4}\d{6}(?:[A-Z\d]{3})/, message: "Formato no compatible" }
   validates :id, :uniqueness => true 
-
+  has_one :maintenance
   attr_accessor :password_plain
     
     

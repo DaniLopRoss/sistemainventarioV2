@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reportesistemas
   resources :maintenances
   resources :equipment
   resources :resources
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
   resources :zones
   resources :reportes
   resources :solicituds
- 
+  resources :reportesistema
   
 
   devise_for :usuarios, controllers: {
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :tipos
   root  'home#index'
+
+# config/routes.rb
 
 
 end 

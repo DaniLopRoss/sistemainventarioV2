@@ -1,0 +1,42 @@
+<div id="grafico"></div>
+<script>
+$(function () {
+    var departamentos = <%= raw @departaments.to_json %>;
+    
+    // Crear un arreglo con los nombres de los departamentos
+    var nombresDepartamentos = departamentos.map(function (dep) {
+      return dep.nombre;
+    });
+    
+    // Crear un arreglo con el número de equipos de cada departamento
+    var numEquipos = departamentos.map(function (dep) {
+      return dep.num_equipos;
+    });
+    
+    // Crear el gráfico utilizando Highcharts
+    $('#grafico').highcharts({
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Equipos por departamento'
+      },
+      xAxis: {
+        categories: nombresDepartamentos
+      },
+      yAxis: {
+        title: {
+          text: 'Número de equipos'
+        }
+      },
+      series: [{
+        name: 'Equipos',
+        data: numEquipos
+      }]
+    });
+  });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir Highcharts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
