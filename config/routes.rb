@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
 # config/routes.rb
 
+get '/reportesperiodo', to: 'reportesistemas#reportesperiodo'
 
 end 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

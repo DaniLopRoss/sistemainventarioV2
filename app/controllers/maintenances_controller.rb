@@ -4,6 +4,17 @@ class MaintenancesController < ApplicationController
   # GET /maintenances or /maintenances.json
   def index
     @maintenances = Maintenance.all
+    if params[:start_date].present? && params[:end_date].present?
+      start_date = Date.parse(params[:start_date])
+      end_date = Date.parse(params[:end_date])
+      @maintenances = @maintenances.where(fecha_inicio: start_date..end_date)
+    end
+  
+    respond_to do |format|
+      format.html
+      
+      format.pdf
+    end
     
   end
 

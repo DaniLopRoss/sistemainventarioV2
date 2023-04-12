@@ -4,7 +4,27 @@ class ReportesistemasController < ApplicationController
   # GET /reportesistemas or /reportesistemas.json
   def index
         @departamentos = Departament.order(num_equipos: :desc)
+        @maintenances = Maintenance.all
+   # Calcula el número de mantenimientos por zona
+   
+ end
+
+ 
+ def reportesperiodo
+  if params[:start_date].present? && params[:end_date].present?
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    @maintenances = Maintenance.where(fecha_inicio: start_date..end_date)
+  else
+    @maintenances = Maintenance.all
   end
+  
+  @maintenance_count_by_zone_and_date = @maintenances.group_by { |maintenance| [maintenance.zone.nombre, maintenance.fecha_inicio.to_date] }
+end
+
+
+
+
 
 
 

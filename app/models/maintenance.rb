@@ -5,6 +5,7 @@ class Maintenance < ApplicationRecord
          belongs_to :physical, autosave: true
          has_many :resources
          belongs_to :usuario, autosave: true 
+         has_one :shape, through: :equipment
          
          
 end

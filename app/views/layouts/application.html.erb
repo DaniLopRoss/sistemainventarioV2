@@ -10,7 +10,20 @@
     <%= stylesheet_link_tag  "style" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
  
- 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Agrega el siguiente enlace en tu archivo HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+    <script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/gantt/modules/gantt.js"></script>
+
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
   
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
@@ -52,10 +65,10 @@
               <ul id="usuarios-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li class="listas">
 
-                  <a href="<%= new_usuario_path %>" class="sidebar"> Registrar Usuarios</a>
+                  <a href="<%= new_usuario_path %>" class="sidebar"> Registrar</a>
                 </li>
                 <li class="listas">
-                  <a href="<%= usuarios_path%>" class="sidebar"> Listar usuarios</a>
+                  <a href="<%= usuarios_path%>" class="sidebar"> Listar</a>
                 </li>
 
               </ul>
@@ -68,10 +81,10 @@
               </a>
               <ul id="area-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li class="listas">
-                  <a href="<%= new_zone_path%>" class="sidebar"> Registrar áreas</a>
+                  <a href="<%= new_zone_path%>" class="sidebar"> Registrar</a>
                 </li>
                 <li class="listas">
-                  <a href="<%= zones_path%>" class="sidebar"> Listar áreas</a>
+                  <a href="<%= zones_path%>" class="sidebar"> Listar</a>
                 </li>
               </ul>
             </li>
@@ -83,10 +96,10 @@
               <ul id="licencia-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li class="listas">
 
-                  <a href="<%= new_licence_path%>" class="sidebar"> Registrar licencia</a>
+                  <a href="<%= new_licence_path%>" class="sidebar"> Registrar</a>
                 </li>
                 <li class="listas">
-                  <a href="<%= licences_path%>" class="sidebar"> Listar licencia</a>
+                  <a href="<%= licences_path%>" class="sidebar"> Listar</a>
                 </li>
               </ul>
             </li>
@@ -98,10 +111,10 @@
               <ul id="departamneto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li class="listas">
 
-                  <a href="<%= new_departament_path%>" class="sidebar"> Registrar departamento</a>
+                  <a href="<%= new_departament_path%>" class="sidebar"> Registrar</a>
                 </li>
                 <li class="listas">
-                  <a href="<%= departaments_path%>" class="sidebar"> Listar departamento</a>
+                  <a href="<%= departaments_path%>" class="sidebar"> Listar</a>
                 </li>
               </ul>
             </li>
@@ -113,7 +126,7 @@
               <ul id="mantenimiento-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li class="listas">
 
-                  <a href="<%= new_maintenance_path%>" class="sidebar"> Registrar mantenimiento</a>
+                  <a href="<%= equipment_index_path%>" class="sidebar"> Registrar</a>
                 </li>
                 <li class="listas">
                   <a href="<%= maintenances_path%>" class="sidebar"> Bitácoras</a>
@@ -131,10 +144,10 @@
               <ul id="solicitud-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li class="listas">
 
-                  <a href="<%= new_solicitud_path%>" class="sidebar"> Registrar solicitud</a>
+                  <a href="<%= new_solicitud_path%>" class="sidebar"> Registrar</a>
                 </li>
                 <li class="listas">
-                  <a href="<%= solicituds_path%>" class="sidebar"> Listar solicitud</a>
+                  <a href="<%= solicituds_path%>" class="sidebar"> Listar</a>
                 </li>
               </ul>
             </li>
@@ -152,10 +165,10 @@
                   </a>
                   <ul id="tipos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="listasb">
-                      <a href="<%= new_equipment_path%>" class="sidebar">Registrar equipos</a>
+                      <a href="<%= new_equipment_path%>" class="sidebar">Registrar</a>
                     </li>
                     <li class="listasb">
-                      <a href="<%= equipment_index_path%>" class="sidebar">Listar equipos</a>
+                      <a href="<%= equipment_index_path%>" class="sidebar">Listar</a>
                     </li>
                   </ul>
                 </li>
@@ -165,10 +178,10 @@
                   </a>
                   <ul id="Herramientas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="listasb">
-                      <a href="<%= new_tool_path%>" class="sidebar">Registrar herramientas</a>
+                      <a href="<%= new_tool_path%>" class="sidebar">Registrar</a>
                     </li>
                     <li class="listasb">
-                      <a href="<%= tools_path%>" class="sidebar">Listar herramientas</a>
+                      <a href="<%= tools_path%>" class="sidebar">Listar</a>
                     </li>
                   </ul>
                 </li>
@@ -178,10 +191,10 @@
                   </a>
                   <ul id="Materiales-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="listasb">
-                      <a href="<%= new_physical_path%>" class="sidebar">Registrar materiales</a>
+                      <a href="<%= new_physical_path%>" class="sidebar">Registrar</a>
                     </li>
                     <li class="listasb">
-                      <a href="<%= physicals_path%>" class="sidebar">Listar materiales</a>
+                      <a href="<%= physicals_path%>" class="sidebar">Listar</a>
                     </li>
                   </ul>
                 </li>
@@ -200,10 +213,10 @@
                   </a>
                   <ul id="tipos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="listasb">
-                      <a href="<%= new_shape_path%>" class="sidebar">Registrar tipos</a>
+                      <a href="<%= new_shape_path%>" class="sidebar">Registrar</a>
                     </li>
                     <li class="listasb">
-                      <a href="<%= shapes_path%>" class="sidebar">Listar tipos</a>
+                      <a href="<%= shapes_path%>" class="sidebar">Listar</a>
                     </li>
                   </ul>
                 </li>
@@ -213,10 +226,10 @@
                   </a>
                   <ul id="Marcas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="listasb">
-                      <a href="<%= new_brand_path%>" class="sidebar">Registrar marcas</a>
+                      <a href="<%= new_brand_path%>" class="sidebar">Registrar</a>
                     </li>
                     <li class="listasb">
-                      <a href="<%= brands_path%>" class="sidebar">Listar marcas</a>
+                      <a href="<%= brands_path%>" class="sidebar">Listar</a>
                     </li>
                   </ul>
                 </li>
@@ -227,10 +240,10 @@
                   </a>
                   <ul id="Insumos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="listasb">
-                      <a href="<%= new_resource_path%>" class="sidebar">Registrar insumos</a>
+                      <a href="<%= new_resource_path%>" class="sidebar">Registrar</a>
                     </li>
                     <li class="listasb">
-                      <a href="<%= resources_path%>" class="sidebar">Listar insumos</a>
+                      <a href="<%= resources_path%>" class="sidebar">Listar</a>
                     </li>
                   </ul>
                 </li>
@@ -242,15 +255,15 @@
 
             <li class="list-group-item">
             <a class="nav-link collapsed" data-bs-target="#re-nav" data-bs-toggle="collapse">
-              <i class="bi bi-card-list"></i><span class="side">Licencias</span><i class="bi bi-chevron-down "></i>
+              <i class="bi bi-card-list"></i><span class="side">Reportes del sistema</span><i class="bi bi-chevron-down "></i>
             </a>
             <ul id="re-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
               <li class="listas">
 
-                <a href="<%= new_licence_path%>" class="sidebar"> Registrar licencia</a>
+                <a href="<%= reportesperiodo_path %>" class="sidebar"> Reportes</a>
               </li>
               <li class="listas">
-              <%= link_to "Reportes del sistema",  reportesistemas_path %>
+              <a href="<%= reportesistemas_path%>" class="sidebar"> Gráficas</a>
               </li>
             </ul>
           </li>
