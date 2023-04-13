@@ -19,8 +19,10 @@ class ReportesistemasController < ApplicationController
     @maintenances = Maintenance.all
   end
   
-  @maintenance_count_by_zone_and_date = @maintenances.group_by { |maintenance| [maintenance.zone.nombre, maintenance.fecha_inicio.to_date] }
+  @maintenance_count_by_zone = @maintenances.group_by { |maintenance| maintenance.zone.nombre }
+                                               .transform_values { |maintenances| maintenances.count }
 end
+
 
 
 
