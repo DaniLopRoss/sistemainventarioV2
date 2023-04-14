@@ -4841,6 +4841,8 @@ textarea.form-control-lg {
 .pagination {
   display: flex;
   padding-left: 0;
+  padding-bottom: 15px;
+  padding-right: 15px;
   list-style: none;
 }
 
@@ -11514,10 +11516,16 @@ ul {
 .listasb {
   list-style-type: disc;
   color: floralwhite;
-  margin-left: -14px;
+  margin-left: 20px;
  
 }
-
+.listas1 {
+  
+  color: floralwhite;
+  /* margin-left: 22px; */
+  font-size: 14.5px;
+ 
+}
 
 .listas, .listasb {
   margin-bottom: 15px;
@@ -13694,13 +13702,42 @@ div.dataTables_wrapper div.dataTables_length label {
   padding: 1px 10px;
   margin: 0;
   margin-top: -110px;
-  margin-right: 65px;
+  margin-right:20px;
+  background-color:#3C81E8 ;
+  color: white;
+ 
+}
+.lim-submit-button {
+  font-size: 10px;
+  padding: 1px 10px;
+  margin: 0;
+  margin-top: -110px;
+  margin-right: 40px;
+  background-color:#3C81E8 ;
+  color: white;
+ 
+}
+.lime-submit-button {
+  font-size: 10px;
+  padding: 1px 10px;
+  margin: 0;
+  margin-top: 0px;
+  margin-right: 40px;
   background-color:#3C81E8 ;
   color: white;
  
 }
 
-
+.mi-submit-button {
+  font-size: 10px;
+  padding: 1px 10px;
+  margin: 0;
+  
+  margin-right: 20px;
+  background-color:#3C81E8 ;
+  color: white;
+ 
+}
 .filtrar {
   margin-right: 15px;
   margin-bottom: 10px;
@@ -13724,6 +13761,7 @@ element.style {
   width: 50%;
   margin: 0 auto;
 }
+
 
 
 .table.table-bordered1 {
@@ -13777,3 +13815,22 @@ div.dataTables_scrollHead table.table-bordered1 {
   border-bottom-width: 0
 }
 
+.form-control1 {
+  display: block;
+  height: 120px;
+  width: 70%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 1.7rem;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

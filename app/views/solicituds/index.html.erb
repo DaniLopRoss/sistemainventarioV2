@@ -26,7 +26,7 @@
       <th data-data="fecha">Fecha</th>
       <th data-data="descripcion">Descripción</th>
       <th data-data="rfc">RFC</th>
-      <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+      <th> Acciones</th>
     </tr>
     </thead>
     <% @solicituds.each do |solicituds| %>
@@ -37,7 +37,7 @@
 <td><%= solicituds.zone.nombre %> </td>
 <td><%= solicituds.fecha %> </td>
 <td><%= solicituds.descripcion %> </td>
-<td><%= solicituds.usuarios_id %> </td>
+<td><%= solicituds.usuario_id %> </td>
 <td>
 <%if can? :edit, Solicitud%>
       <a href="<%= edit_solicitud_path(solicituds)%>" class="edit"><i class="bi bi-pencil-square"></i></a>

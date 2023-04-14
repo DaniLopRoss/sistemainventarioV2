@@ -7,13 +7,13 @@
 </head>
 <div align="center">
 
-    <h5  class="table-title">Mantenimientos por periodo</h5>
+    <h5  class="table-title">Tipo de mantenimientos por periodo</h5>
 
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
             <div class="filtrar">
-            <%= form_tag(reportesperiodo_path, method: "get", class: "form-inline") do %>
+            <%= form_tag(reportestipo_path, method: "get", class: "form-inline") do %>
               <div class="form-grou">
                 <%= label_tag(:start_date, "Desde:") %>
                 <%= date_field_tag(:start_date, params[:start_date], class: "form-contro", id:"start_date") %>
@@ -27,7 +27,7 @@
               <%= button_tag(type: 'submit', class: 'btn my-submit-button') do %>
                 <i class='bi bi-funnel'></i>
               <% end %>
-              <a href="<%=reportesperiodo_path %>" class="btn lim-submit-button"><i class="bi bi-trash"></i></a>
+              <a href="<%=reportestipo_path %>" class="btn lim-submit-button"><i class="bi bi-trash"></i></a>
             <% end %>
           </div>
           <br>
@@ -37,12 +37,12 @@
             <thead class="thead-blue">
               <tr>
                 <th>No.</th>
-                <th>Zona</th>
+                <th>Tipo de mantenimiento</th>
                 <th >Mantenimientos</th>
               </tr>
             </thead>
             <tbody>
-              <% @maintenance_count_by_zone.each do |zone, count| %>
+              <% @maintenance_count_by_tipo.each do |zone, count| %>
                 <tr>
                   <td></td>
                   <td><%= zone %></td>
@@ -79,7 +79,7 @@
             extend: 'excelHtml5',
             text: '<i class="bi bi-file-earmark-excel"></i> ',
             titleAttr: 'Exportar a Excel',
-            title: 'Mantenimientos por zona',
+            title: 'Mantenimiento mas común',
             className: 'btn btn-success'
           },
           {
@@ -87,7 +87,7 @@
             text: '<i class="bi bi-file-earmark-pdf"></i> ',
             titleAttr: 'Exportar a PDF',
             className: 'btn btn-danger',
-            title: 'Mantenimientos por zona',
+            title: 'Mantenimiento mas común',
             customize: function(doc) {
             
               var desde = $('#start_date').val();
@@ -155,7 +155,7 @@
             text: '<i class="bi bi-printer"></i> ',
             titleAttr: 'Imprimir',
             className: 'btn btn-info',
-            title: 'Mantenimientos por zona'
+            title: 'Mantenimiento mas común'
             
           },
         ],

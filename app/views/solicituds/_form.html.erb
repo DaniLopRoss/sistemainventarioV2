@@ -40,10 +40,10 @@
   </div>
 <br>
    <div class="form-group row">
-                       <%= form.label :usuarios_id , "Usuario:" , class:'col-sm-2'%>
+                       <%= form.label :usuario_id , "Usuario:" , class:'col-sm-2'%>
                        <div class="col-sm-4">
                        <div class="placeholder">
-                       <%= form.collection_select(:usuarios_id, Usuario.all{|u| [u.nombre, u.rfc]}, :id, :nombre, class:'form-control', prompt:"Seleccione su usuario")%>
+                       <%= form.collection_select(:usuario_id, Usuario.all{|u| [u.nombre, u.rfc]}, :id, :nombre, class:'form-control', prompt:"Seleccione su usuario")%>
                         </div>
                        </div>
                             </div>

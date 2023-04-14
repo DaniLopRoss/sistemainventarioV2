@@ -20,9 +20,10 @@
   <%= link_to "Editar", edit_reporte_path(@reporte),   class: "btn btn-warning btn-xs round btn-editar " %> 
    <%end%> 
    <%if can? :destroy, Reporte%>
-    <%= link_to "Eliminar reporte", @reporte, method: :delete, data: { confirm: "Esta seguro de eliminar"},  class: "btn btn-danger btn-eliminar" %>
+    <%= link_to "Eliminar", @reporte, method: :delete, data: { confirm: "Esta seguro de eliminar"},  class: "btn btn-danger btn-eliminar" %>
   <%end%>
   <%= link_to "Regresar", reportes_path,  class: "btn btn-success btn-xs round btn-regresar " %>
-
+<br>
+</br>
 
 </div>

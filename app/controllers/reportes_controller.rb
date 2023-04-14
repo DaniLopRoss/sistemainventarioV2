@@ -4,12 +4,12 @@ class ReportesController < ApplicationController
 
   # GET /reportes or /reportes.json
   def index
-    @start_date = params[:start].try(:to_date) || 30.days.ago.to_date
-    @end_date = params[:end].try(:to_date) || Date.current
-    range = (@start_date..@end_date)
-    
-    @reportes = Reporte.where(date: range).order(date: :desc)
    @reportes = Reporte.all
+   if params[:start_date].present? && params[:end_date].present?
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    @reportes = @reportes.where(fecha: start_date..end_date)
+  end
    
 end 
 
@@ -21,6 +21,7 @@ end
   # GET /reportes/new
   def new
     @reporte = Reporte.new
+    @maintenance = Maintenance.find(params[:maintenance_id])
   end
 
   # GET /reportes/1/edit
@@ -30,7 +31,15 @@ end
   # POST /reportes or /reportes.json
   def create
     @reporte = Reporte.new(reporte_params)
+    @reporte.maintenance_id = params[:reporte][:maintenance_id] # Aquí se el maintenance_id al mantenimiento
+    if reporte_params[:tipo_problema] == "Otro"
+      reporte_params[:tipo_problema] = reporte_params[:otro_tipo_problema]
+    end
+    
+    @reporte.update(reporte_params)
 
+
+    #@maintenance.equipment_id = params[:maintenance][:equipment_id] # Aquí se el equipment_id al mantenimiento
     respond_to do |format|
       if @reporte.save
         format.html { redirect_to reporte_url(@reporte), notice: "Reporte se ha registrado correctamente." }
@@ -73,6 +82,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def reporte_params
-      params.require(:reporte).permit(:fecha, :observaciones, :tipo_problema, :maintenances_id)
+      params.require(:reporte).permit(:fecha, :observaciones, :tipo_problema, :otro_tipo_problema, :maintenance_id)
     end
 end

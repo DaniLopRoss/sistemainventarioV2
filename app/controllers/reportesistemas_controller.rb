@@ -24,8 +24,34 @@ class ReportesistemasController < ApplicationController
 end
 
 
+def reportesolicitud
+  @solicituds = Solicitud.all
+  if params[:start_date].present? && params[:end_date].present?
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    @solicituds = Solicitud.where(fecha: start_date..end_date)
+  else
+    @solicituds = Solicitud.all
+  end
+  
+  @solicitud_count_by_zone = @solicituds.group_by { |solicitud| solicitud.zone.nombre }
+                                               .transform_values { |solicituds| solicituds.count }
+end
 
 
+
+def reportestipo
+  if params[:start_date].present? && params[:end_date].present?
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    @maintenances = Maintenance.where(fecha_inicio: start_date..end_date)
+  else
+    @maintenances = Maintenance.all
+  end
+  
+  @maintenance_count_by_tipo = @maintenances.group_by { |maintenance| maintenance.tipo_mantenimiento }
+                                               .transform_values { |maintenances| maintenances.count }
+end
 
 
 

@@ -1,147 +1,258 @@
 <head>
-<%= stylesheet_link_tag "style" %>
-
+  <%= stylesheet_link_tag "style" %>
+  <img src="/assets/logo.png" alt="Logo" class="logo-hidden">
+  <img src="/assets/logo2.png" alt="Logo2" class="logo-hidden">
 
 </head>
-<div align= "center">
+<div align="center">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="">Mantenimiento</a></li>
+    <li class="breadcrumb-item active">Lista de mantenimiento</li>
+  </ol>
+  <h5>Mantenimiento</h5>
 
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="filtrar">
+          <%= form_tag(maintenances_path, method: "get", class: "form-inline") do %>
+          <div class="form-grou">
+            <%= label_tag(:start_date, "Desde:") %>
+            <%= date_field_tag(:start_date, params[:start_date], class: "form-contro", id:"start_date") %>
+          </div>
+          <div class="form-grou mx-2">
+            <%= label_tag(:end_date, "Hasta:") %>
+            <%= date_field_tag(:end_date, params[:end_date], class: "form-contro",  id:"end_date") %>
+          </div>
 
-<h5>Mantenimiento</h5>
+          <%= button_tag(type: 'submit', class: 'btn mi-submit-button') do %>
+          <i class='bi bi-funnel'></i>
+          <% end %>
+          <a href="<%=maintenances_path %>" class="btn lime-submit-button"><i class="bi bi-trash"></i></a>
+          <% end %>
+        </div>
+        <br>
+        </br>
+        <div class="table-responsive pt-3">
 
-<div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                <div class="filtrar">
-                <%= form_tag(maintenances_path, method: "get", class: "form-inline") do %>
-                  <div class="form-grou">
-                    <%= label_tag(:start_date, "Desde:") %>
-                    <%= date_field_tag(:start_date, params[:start_date], class: "form-contro") %>
-                  </div>
-                  <div class="form-grou mx-2">
-                    <%= label_tag(:end_date, "Hasta:") %>
-                    <%= date_field_tag(:end_date, params[:end_date], class: "form-contro") %>
-                  </div>
-                  <br>
-                  </br>
-                  <%= button_tag(type: 'submit', class: 'btn my-submit-button') do %><i class='bi bi-funnel'></i><% end %>
-                <% end %>
-                 </div>
-                  <div class="table-responsive pt-3">
-
-                  
-                  <table class="table table-bordered" id="tablaman">
-                  <thead class="thead-blue" >
+          <table class="table table-bordered" id="tablaman1">
+            <thead class="thead-blue">
               <tr>
 
-              <th></th>
+                <th></th>
 
-              <th scope="col">Nombre</th>
-              <th scope="col">Fecha inicio</th>
-              <th scope="col">Fecha fin </th>
-              <th scope="col">Observaciones</th>
-              <th scope="col">Tipo de manteniminto</th>
-              <th scope="col">Equipo</th>
-              <th scope="col">Área</th>
-              <th scope="col">Materiales</th>
-              <th scope="col">Herramienta</th>
-              <th scope="col">Insumo</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Acciones</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha inicio</th>
               
+                <th scope="col">Tipo de manteniminto</th>
+                <th scope="col">Equipo</th>
+                <th scope="col">Área</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Acciones</th>
+
               </tr>
-              </thead>
+            </thead>
 
-              <tbody>
+            <tbody>
 
-              
               <% @maintenances.each do |maintenance| %>
               <tr>
 
-              <td></td>
+                <td></td>
 
-              <td><%= maintenance.nombre %></td>
-              <td><%= maintenance.fecha_inicio %></td>
-              <td><%= maintenance.fecha_fin %></td>
-              <td><%= maintenance.observaciones %></td>
-              <td><%= maintenance.tipo_mantenimiento %></td>
-              <td><%= maintenance.shape.nombre %></td>
-              <td><%= maintenance.zone.nombre %></td>
-              <td><%= maintenance.physical.nombre %></td>
-              <td><%= maintenance.tool.nombre %></td>
-              <td><%= maintenance.resource_id %></td>
-              <td><%= maintenance.usuario.nombre %></td>
-              <td>
-             
+                <td><%= maintenance.nombre %></td>
+                <td><%= maintenance.fecha_inicio %></td>
+                <td><%= maintenance.tipo_mantenimiento %></td>
+                <td><%= maintenance.shape.nombre %></td>
+                <td><%= maintenance.zone.nombre %></td>
+                <td><%= maintenance.usuario.nombre %></td>
+                <td>
 
-             <% if can? :edit, Maintenance%>
-              <a href="<%= edit_maintenance_path(maintenance)%>" class="edit"><i class="bi bi-pencil-square"></i></a>
-              <%end%>
-              <% if can? :show, Maintenance%>
-               <a  class="mostrar"  <%= link_to ({:action => :show, :id => maintenance.id}) do %><i class="bi bi-eye-fill"></i><%end%></a>
-               <%end %>
-               <% if can? :destroy, Maintenance%>
-               <a class="eliminar" <%= link_to ({ :action => :destroy, :id => maintenance.id})do%>
-                  <i class="bi bi-trash"></i>
+                  <% if can? :edit, Maintenance%>
+                  <a href="<%= edit_maintenance_path(maintenance)%>" class="edit"><i
+                      class="bi bi-pencil-square"></i></a>
                   <%end%>
-                  
+                  <% if can? :show, Maintenance%>
+                  <a class="mostrar" <%= link_to ({:action => :show, :id => maintenance.id}) do %><i
+                    class="bi bi-eye-fill"></i><%end%></a>
+                  <%end %>
+                  <% if can? :destroy, Maintenance%>
+                  <a class="eliminar" <%= link_to ({ :action => :destroy, :id => maintenance.id})do%> <i
+                    class="bi bi-trash"></i>
+                    <%end%>
+
                   </a>
                   <%end%>
-              </td>
+                  <%= link_to "Crear Reporte", new_reporte_path(maintenance_id: maintenance.id) %>
+                </td>
               </tr>
               <%end%>
-              </tbody>
-              <a href="<%= equipment_index_path%>" class="new"><i class="bi bi-plus-circle-fill"></i></a>
+            </tbody>
+            <a href="<%= equipment_index_path%>" class="new"><i class="bi bi-plus-circle-fill"></i></a>
 
-             </div>
-            </div>
-            </div>
-            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-
-<script>
-            $(document).ready(function() {
-              var oTable = $("#tablaman").DataTable({
-                language: {
-                  url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
-              },
-
-          responsive: "true",
-          dom: 'Bfrtilp',    
-                buttons:[ 
-        {
-          extend:    'excelHtml5',
-          text:      '<i class="bi bi-file-earmark-excel"></i> ',
-          titleAttr: 'Exportar a Excel',
-          className: 'btn btn-success'
+  <script>
+    $(document).ready(function() {
+      var logo = '/assets/logo.png';
+      var logo2 = '/assets/logo2.png';
+      var printableColumns = ':not(:last-child)';
+      var leyenda = 'TECNOLÓGICO NACIONAL DE MÉXICO';
+      var leyenda1 = 'Instituto Tecnológico de Oaxaca';
+      var oTable = $("#tablaman1").DataTable({
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
         },
-        {
-          extend:    'pdfHtml5',
-          text:      '<i class="bi bi-file-earmark-pdf"></i> ',
-          titleAttr: 'Exportar a PDF',
-          className: 'btn btn-danger'
-        },
-        {
-          extend:    'print',
-          text:      '<i class="bi bi-printer"></i> ',
-          titleAttr: 'Imprimir',
-          className: 'btn btn-info'
-        },
-      ],
-                columnDefs: [ {
-            sortable: false,
-            "class": "index",
-            targets: 0
-        } ],
-        order: [[ 1, 'asc' ]],
+        autoWidth: false,
+        order: [
+          [1, 'asc']
+        ],
+        responsive: "true",
+        dom: 'Bfrtilp',
+        buttons: [{
+            extend: 'excelHtml5',
+            text: '<i class="bi bi-file-earmark-excel"></i> ',
+            titleAttr: 'Exportar a Excel',
+            className: 'btn btn-success',
+            title: 'Mantenimientos',
+            exportOptions: {
+              columns: ':not(:last-child)'
+            }
+          },
+          {
+            extend: 'pdfHtml5',
+            text: '<i class="bi bi-file-earmark-pdf"></i> ',
+            titleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            title: 'Mantenimientos',
+            exportOptions: {
+              columns: ':not(:last-child)'
+            },
+            customize: function(doc) {
+              var desde = $('#start_date').val();
+              var hasta = $('#end_date').val();
+              var periodoTexto = 'Período: ' + desde + ' a ' + hasta;
+              var periodo = {
+                text: periodoTexto,
+                fontSize: 11,
+                alignment: 'center',
+                margin: [0, -718, 0, 20]
+              };
+              doc.content.push(periodo);
+              doc.content[0].fontSize = 12;
+              doc.content[0].alignment = 'center';
+              doc.content[0].absolutePosition = {
+                x: 32,
+                y: 110
+              };
+              doc.content[0].width = '100%';
+              doc.content[1].margin = [0, 40, 0, 500]; //tabla 40 arriba
+              doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+                '');
+              doc.content[1].table.alignment = 'center';
+              var img1 = new Image();
+              img1.src = logo;
+              var imgData1 = getBase64Image(img1);
+              var img2 = new Image();
+              img2.src = logo2;
+              var imgData2 = getBase64Image(img2);
+              doc.content.splice(0, 0, {
+                margin: [30, 0, 0, 12],
+                columns: [{
+                    image: imgData2,
+                    width: 50,
+                    alignment: 'left'
+                  },
+                  {
+                    width: 'auto',
+                    alignment: 'center',
+                    stack: [{
+                        text: leyenda,
+                        margin: [90, 10, 0, 0]
+                      },
+                      {
+                        text: leyenda1,
+                        margin: [90, 10, 0, 0]
+                      }
+                    ]
+                  },
+                  {
+                    image: imgData1,
+                    width: 50,
+                    alignment: 'right',
+                    margin: [-70, 0, 0, 12]
+                  }
+                ]
+              });
+              doc.content[1].margin = [0, 0, 70, 0];
+            }
+          },
+          {
+            extend: 'print',
+            text: '<i class="bi bi-printer"></i> ',
+            titleAttr: 'Imprimir',
+            className: 'btn btn-info',
+            title: 'Mantenimientos',
+            exportOptions: {
+              columns: ':not(:last-child)'
+            }
+          },
+        ],
+        columnDefs: [{
+          sortable: false,
+          "class": "index",
+          targets: 0
+        }],
+        order: [
+          [1, 'asc']
+        ],
         fixedColumns: true
-        } );
- 
-    oTable.on( 'order.dt search.dt', function () {
-        oTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
-            }); 
+      });
+      oTable.on('order.dt search.dt', function() {
+        let i = 1;
+        oTable.cells(null, 0, {
+          search: 'applied',
+          order: 'applied'
+        }).every(function(cell) {
+          this.data(i++);
+        });
+      }).draw();
+      // Función para convertir la imagen a base64
+      function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        return dataURL;
+      }
+    });
+  </script>
 
-                
-            </script>
+
+
+
+
+
+     
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

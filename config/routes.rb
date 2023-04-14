@@ -32,6 +32,9 @@ Rails.application.routes.draw do
 
 get '/reportesperiodo', to: 'reportesistemas#reportesperiodo'
 
+get '/reportesolicitud', to: 'reportesistemas#reportesolicitud'
+get '/reportestipo', to: 'reportesistemas#reportestipo'
+
 end 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

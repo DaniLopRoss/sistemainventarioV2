@@ -1,55 +1,83 @@
 <head>
-<%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "style" %>
 </head>
 
-
- <div class="probar">
- <%= form_with(model: reporte) do |form| %>
+<div class="probar">
+  <%= form_with(model: reporte) do |form| %>
   <% if reporte.errors.any? %>
-    <div style="color: red">
-     
+  <div style="color: red">
 
-      <ul>
-        <% reporte.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul>
+      <% reporte.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
-<br>
-   <div class="form-group row">
+  <br>
+  <div class="form-group row">
     <%= form.label :fecha,"Fecha:" ,class:'col-sm-2' %>
     <div class="col-sm-4">
-    <%= form.date_field :fecha ,  class:'form-control' %>
-  </div>
+      <%= form.date_field :fecha ,  class:'form-control' %>
+    </div>
   </div>
 
-   <div class="form-group row">
+  <div class="form-group row">
     <%= form.label :observaciones,"Observaciones:",  class:'col-sm-2'  %>
     <div class="col-sm-4">
-    <%= form.text_area :observaciones,  class:'form-control'  %>
-  </div>
+      <%= form.text_area :observaciones,  class:'form-control'  %>
+    </div>
   </div>
   <br>
 
-   <div class="form-group row">
-    <%= form.label :tipo_problema, "Tipo de problema:", class:'col-sm-2'  %>
+    <div class="form-group row">
+    <%= form.label :tipo_problema ,"Tipo de problema", class:'col-sm-2'%>
     <div class="col-sm-4">
-    <%= form.select :tipo_problema, ["No hay internet", "Instalacion de windows ","Licencia de Office", "Acceso no autorizado pagina web", "Virus en la maquina", "Aplicacion de antivirus"], class:'form-control'  %>
-  </div>
-  </div>
+    <%= form.select :tipo_problema, ["No hay internet", "Instalacion de windows", "Licencia de Office", "Acceso no autorizado pagina web", "Virus en la maquina", "Aplicacion de antivirus", "Otro"], { prompt: "Seleccione un problema", selected: reporte.tipo_problema }, { class: 'form-control', id: 'tipo_problema_select', style: "height: 84%;"  } %>
+    </div>
+    </div>
 
-   <div class="form-group row">
-    <%= form.label :maintenances_id,'Mantenimiento:',  class:'col-sm-2'  %>
+    <div id="tipo_problema-div" style="display:none;" class="form-group row">
+    <%= form.label :tipo_problema, "Especificar otro tipo de problema:", class: 'col-sm-2' %>
     <div class="col-sm-4">
-    <%= form.collection_select(:maintenances_id, Maintenance.all{ :nombre}, :id, :nombre, class:'form-control', prompt:"Seleccione su mantenimiento")%>
+    <%= form.text_field :tipo_problema, class: 'form-control', id: 'tipo_problema', style: 'display:none;', class:'form-control'  %>
+    </div>
+    </div>
+
+  
+
+
+
+
+
+  <div class="form-group row hidden">
+<%= form.label :maintenance_id,"ID",class:'col-sm-2' %>
+<div class=" col-sm-4">
+    <%= form.hidden_field :maintenance_id, value: @maintenance.id %>
   </div>
-  </div>
-<br>
-</br>
-  <div>
-  <button  class="btn btn-info  btn-xs round btn-guardar"  <%= form.submit %>Guardar </button>
-  <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning btn-xs round btn-cancelar"%>
-  <%= link_to "Regresar", reportes_path, class: "btn btn-success btn-xs round btn-regresar "  %>
-  </div>
-<% end %>
+</div>
+
+<br></br>
+<div>
+  <button class="btn btn-info  btn-xs round btn-guardar" <%= form.submit %>Guardar </button>
+    <%= link_to 'Cancelar', reportes_path, class: "btn btn-warning btn-xs round btn-cancelar"%> 
+    </div> <% end %>
+<br></br>
+
+   
+
+<script>
+  $(document).ready(function() {
+    $('#tipo_problema_select').on('change', function() {
+      var selected_option = $(this).val();
+      if (selected_option === 'Otro') {
+        $('#tipo_problema').show();
+        $('#tipo_problema-div').show();
+      } else {
+        $('#tipo_problema').hide();
+        $('#tipo_problema-div').hide();
+      }
+    });
+  });
+</script>
+

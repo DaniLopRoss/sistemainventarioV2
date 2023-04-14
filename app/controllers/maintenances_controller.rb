@@ -42,7 +42,7 @@ class MaintenancesController < ApplicationController
   # POST /maintenances or /maintenances.json
   def create
     @maintenance = Maintenance.new(maintenance_params)
-    @maintenance.equipment_id = params[:maintenance][:equipment_id] # Aquí asignas el equipment_id al mantenimiento
+    @maintenance.equipment_id = params[:maintenance][:equipment_id] # Aquí se el equipment_id al mantenimiento
   
     respond_to do |format|
       if @maintenance.save

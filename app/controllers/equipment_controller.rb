@@ -5,9 +5,14 @@ class EquipmentController < ApplicationController
   # GET /equipment or /equipment.json
   def index
    @equipment = Equipment.all.order(:id)
+   @equipments = Equipment.all
    #@new_equipment_id = flash[:new_equipment_id]
   # @equipment= Equipment.get_mantenimientos  
-  
+  if params[:start_date].present? && params[:end_date].present?
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    @equipment = @equipment.where(fecharegistro: start_date.beginning_of_day..end_date.end_of_day)
+  end
   end
 
   # GET /equipment/1 or /equipment/1.json
