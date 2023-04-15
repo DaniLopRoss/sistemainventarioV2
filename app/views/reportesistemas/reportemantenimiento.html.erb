@@ -1,0 +1,108 @@
+<head>
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.4/sp-2.1.2/sl-1.6.2/datatables.min.css" rel="stylesheet"/>
+ 
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/sp-2.1.2/sl-1.6.2/datatables.min.js"></script>
+<%= stylesheet_link_tag "mind" %>
+</head>
+
+<body>
+    <div align="center">
+    
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Mantenimiento</a></li>
+            <li class="breadcrumb-item active">Lista de mantenimientos</li>
+        </ol>
+        <h5>Mantenimientos</h5>
+        <div id="chart-container"></div>
+
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive pt-3">
+                        <table class="table table-bordered" id="example">
+                            <thead class="thead-blue">
+                                <tr>
+                                    <th></th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Fecha inicio</th>
+                                    <th scope="col">Tipo de manteniminto</th>
+                                    <th scope="col">Equipo</th>
+                                    <th scope="col">Área</th>
+                                    <th scope="col">Usuario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @maintenances.each do |maintenance| %>
+                                <tr>
+                                    <td></td>
+                                    <td><%= maintenance.nombre %></td>
+                                    <td><%= maintenance.fecha_inicio %></td>
+                                    <td><%= maintenance.tipo_mantenimiento %></td>
+                                    <td><%= maintenance.shape.nombre %></td>
+                                    <td><%= maintenance.zone.nombre %></td>
+                                    <td><%= maintenance.usuario.nombre %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+
+  
+        <script>
+        $(document).ready(function () {
+            // Create DataTable
+            var table = $('#example').DataTable({
+                dom: 'Pfrtip',
+                select: true,
+            });
+
+            // Create the chart with initial data
+            var chart = Highcharts.chart('chart-container', {
+                chart: {
+                    type: 'pie',
+                },
+                title: {
+                    text: 'Staff Count Per Position',
+                },
+                series: [
+                    {
+                        data: chartData(table),
+                    },
+                ],
+            });
+
+            // On each draw, update the data in the chart
+            table.on('draw', function () {
+                chart.series[0].setData(chartData(table));
+            });
+        });
+
+function chartData(table) {
+var counts = {};
+
+// Count the number of entries for each position
+table
+.column(3, { search: "applied" })
+.data()
+.each(function (val) {
+  if (counts[val]) {
+    counts[val] += 1;
+  } else {
+    counts[val] = 1;
+  }
+});
+
+// And map it to the format highcharts uses
+return $.map(counts, function (val, key) {
+return {
+  name: key,
+  y: val,
+};
+});
+}
+</script>

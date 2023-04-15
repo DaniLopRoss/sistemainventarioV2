@@ -54,6 +54,9 @@ def reportestipo
 end
 
 
+def reportemantenimiento
+  @maintenances = Maintenance.all
+end
 
 
   # GET /reportesistemas/1 or /reportesistemas/1.json
