@@ -39,7 +39,7 @@
             <thead class="thead-blue">
               <tr>
 
-                <th></th>
+                <th>No.</th>
 
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha inicio</th>
@@ -61,7 +61,7 @@
                 <td></td>
 
                 <td><%= maintenance.nombre %></td>
-                <td><%= maintenance.fecha_inicio %></td>
+                <td><%= maintenance.fecha_inicio.strftime('%d/%m/%Y') %></td>
                 <td><%= maintenance.tipo_mantenimiento %></td>
                 <td><%= maintenance.shape.nombre %></td>
                 <td><%= maintenance.zone.nombre %></td>

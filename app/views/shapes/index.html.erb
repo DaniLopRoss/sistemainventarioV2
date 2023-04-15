@@ -20,16 +20,17 @@
                   <table class="table table-bordered" id="tablatipo">
                   <thead class="thead-blue" >
                   <tr>
-                  <th>Id</th>
+                  <th>No.</th>
+             
                   <th>Nombre</th>
                   <th> Acciones</th>
 
                   </tr>
                   </thead>
 <% @shapes.each do |shape| %>
- 
   <tr>
-<td><%= shape.id %></td>
+  <td></td>
+
 <td><%= shape.nombre %></td> 
 <td>
       <%if can? :edit, Shape%>
@@ -54,12 +55,21 @@
 
 
 <script>
-            $(document).ready(function() {
-              var oTable = $("#tablatipo").DataTable({
-                language: {
-                  url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
-              }
-              });
-      } );
-            </script>
+    $(document).ready(function() {
+        var oTable = $("#tablatipo").DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
+            }
+        });
+
+        oTable.on('order.dt search.dt', function() {
+            let i = 1;
+
+            oTable.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+
+    });
+</script>
 

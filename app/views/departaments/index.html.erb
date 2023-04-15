@@ -21,9 +21,10 @@
                   <table class="table table-bordered" id="tabladepartamentos">
                   <thead class="thead-blue" >
                     <tr>
-                      <th scope="col">ID</th>
-                      <th>NOMBRE</th>
-                      <th>Num_equipo</th>
+                    <th scope="col">No.</th>
+                    
+                      <th>Nombre</th>
+                      <th>No,Equipos</th>
                      
                       <th>Acciones</th>
                      
@@ -34,7 +35,8 @@
                   <% @departaments.each do |departamento| %>
                    
                     <tr>
-                        <td><%= departamento.id %></td>
+                        <td></td>
+                       
                         <td><%= departamento.nombre %></td>
                         <td><%= departamento.num_equipos %></td>
                         <td > 
@@ -65,14 +67,23 @@
             </div>
 
 
-<script>
+            <script>
             $(document).ready(function() {
               var oTable = $("#tabladepartamentos").DataTable({
-                language: {
-                  url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
-              }
+                  language: {
+                      url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
+                  }
               });
-      } );
+            
+              oTable.on('order.dt search.dt', function() {
+                  let i = 1;
+            
+                  oTable.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                      this.data(i++);
+                  });
+              }).draw();
+            
+            });
             </script>
 
 

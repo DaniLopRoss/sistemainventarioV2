@@ -58,7 +58,7 @@
                   <td></td>
   
                   <td><%=  reportes.id %></td>
-                  <td><%= reportes.fecha %></td>
+                  <td><%= reportes.fecha.strftime('%d/%m/%Y')  %></td>
                   <td><%= reportes.observaciones %></td>
                   <td><%= reportes.tipo_problema %></td>
                   <td><%= reportes.maintenance_id %></td>

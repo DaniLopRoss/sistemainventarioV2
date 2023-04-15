@@ -35,6 +35,7 @@ get '/reportesperiodo', to: 'reportesistemas#reportesperiodo'
 get '/reportesolicitud', to: 'reportesistemas#reportesolicitud'
 get '/reportestipo', to: 'reportesistemas#reportestipo'
 get '/reportemantenimiento', to: 'reportesistemas#reportemantenimiento'
+get '/graficaequipo', to: 'reportesistemas#graficaequipo'
 
 end 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

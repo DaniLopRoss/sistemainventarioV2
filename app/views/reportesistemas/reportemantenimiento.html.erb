@@ -22,7 +22,7 @@
                         <table class="table table-bordered" id="example">
                             <thead class="thead-blue">
                                 <tr>
-                                    <th></th>
+                                    <th>No.</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Fecha inicio</th>
                                     <th scope="col">Tipo de manteniminto</th>
@@ -36,7 +36,7 @@
                                 <tr>
                                     <td></td>
                                     <td><%= maintenance.nombre %></td>
-                                    <td><%= maintenance.fecha_inicio %></td>
+                                    <td><%= maintenance.fecha_inicio.strftime('%d/%m/%Y') %></td>
                                     <td><%= maintenance.tipo_mantenimiento %></td>
                                     <td><%= maintenance.shape.nombre %></td>
                                     <td><%= maintenance.zone.nombre %></td>
@@ -56,6 +56,8 @@
         <script>
         $(document).ready(function () {
             
+            var myColors = ['#8FFFB2','#660065','#FF0000', '#00FF00', '#0000FF','3CACE8','A13CE8','F3EC00','00F343','F34300','6600F3','D700F3','006629'];
+
             // Create DataTable
             var table = $('#example').DataTable({
                 dom: 'Pfrtip',
@@ -83,6 +85,7 @@
                 title: {
                     text: 'Mantenimientos',
                 },
+                colors: myColors, // añade esta línea para definir la paleta de colores personalizada
                 series: [
                     {
                         data: chartData(table),

@@ -78,7 +78,9 @@
                 <td><%= equipment.zone.departament.nombre%></td>
                 <td><%= equipment.zone.nombre %></td>
                 <td><%= equipment.estatus %></td>
-                <td><%= equipment.fecharegistro%></td>
+                <td><%= equipment.fecharegistro.strftime('%d/%m/%Y') %></td>
+
+
                 <% end %>
                 <td>
                   <% if can? :edit, Equipment%>

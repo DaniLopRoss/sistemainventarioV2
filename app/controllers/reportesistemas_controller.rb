@@ -58,6 +58,9 @@ def reportemantenimiento
   @maintenances = Maintenance.all
 end
 
+def graficaequipo
+  @equipments = Equipment.all
+end
 
   # GET /reportesistemas/1 or /reportesistemas/1.json
   def show

@@ -21,7 +21,8 @@
                   <table class="table table-bordered" id="tablainsumos">
                   <thead class="thead-blue" >
                   <tr>
-                  <th scope="col">Id </th>
+                  <th>No.</th>
+               
                   <th scope="col">Nombre</th>
                   
                   <th>Características</th>
@@ -37,7 +38,8 @@
 <div id="resources">
   <% @resources.each do |resource| %>
     <tr>
-    <td><%= resource.id %></td>
+    <td></td>
+    
     <td><%= resource.nombre %></td> 
     <td><%= resource.caracteristica %></td> 
     <td><%= resource.existencia %></td> 
@@ -67,11 +69,20 @@
 <a href="resources/new" class="new"><i class="bi bi-plus-circle-fill"></i></a>
 
 <script>
-            $(document).ready(function() {
-              var oTable = $("#tablainsumos").DataTable({
-                language: {
-                  url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
-              }
-              });
-      } );
-            </script>
+    $(document).ready(function() {
+        var oTable = $("#tablainsumos").DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
+            }
+        });
+
+        oTable.on('order.dt search.dt', function() {
+            let i = 1;
+
+            oTable.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+
+    });
+</script>

@@ -21,10 +21,11 @@
           <table class="table table-bordered" id="tableareas">
             <thead class="thead-blue">
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">NOMBRE</th>
+              <th>No.</th>
+               
+                <th scope="col">Nombre</th>
                 <th scope="col">Departamento</th>
-                <th scope="col">ACCIONES</th>
+                <th scope="col">Acciones</th>
 
               </tr>
             </thead>
@@ -32,7 +33,8 @@
             <% @zones.each do |zone| %>
 
             <tr>
-              <td><%= zone.id %></td>
+            <td></td>
+              
               <td><%= zone.nombre %></td>
               <td><%= zone.departament.nombre %></td>
               <td>
@@ -64,11 +66,20 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-    var oTable = $("#tableareas").DataTable({
+$(document).ready(function() {
+  var oTable = $("#tableareas").DataTable({
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
+          url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/es-MX.json'
       }
-    });
   });
+
+  oTable.on('order.dt search.dt', function() {
+      let i = 1;
+
+      oTable.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+          this.data(i++);
+      });
+  }).draw();
+
+});
 </script>
